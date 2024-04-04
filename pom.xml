@@ -15,12 +15,7 @@
     </properties>
 
     <modules>
-        <module>hero-common</module>
-        <module>economy-model</module>
-        <module>economy-gui</module>
         <module>battle-model</module>
-        <module>battle-gui</module>
-        <module>eco-battle-converter</module>
     </modules>
 
 

@@ -1,9 +1,15 @@
+// ******************************************************************
+//
+// Copyright 2024 PSI Software SE. All rights reserved.
+// PSI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
+//
+// ******************************************************************
+
 package pl.psi;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,50 +19,37 @@ import pl.psi.creatures.Creature;
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
-public class TurnQueue {
+public class TurnQueue
+{
 
-    public static final String END_OF_TURN = "END_OF_TURN";
-    public static final String NEXT_CREATURE = "NEXT_CREATURE";
-    private final Collection<Creature> creatures;
-    private final Queue<Creature> creaturesQueue;
-    private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
-    private Creature currentCreature;
-    private int roundNumber;
+    private final Queue< Creature > queue = new LinkedList<>();
+    private final List< Creature > allCreatures;
 
-    public TurnQueue(final Collection<Creature> aCreatureList,
-                     final Collection<Creature> aCreatureList2) {
-        creatures = Stream.concat(aCreatureList.stream(), aCreatureList2.stream())
-                .collect(Collectors.toList());
-        creaturesQueue = new LinkedList<>();
-        initQueue();
-        creatures.forEach(observerSupport::addPropertyChangeListener);
-        next();
+    public TurnQueue( List< Creature > aCreatures1, List< Creature > aCreatures2 )
+    {
+        allCreatures = Stream.concat( aCreatures1.stream(), aCreatures2.stream() )
+            .sorted( Comparator.comparingInt( Creature::getSpeed )
+                .reversed() )
+            .collect( Collectors.toList() );
+        queue.addAll( allCreatures );
     }
 
-    private void initQueue() {
-        creaturesQueue.addAll(creatures);
+    public Creature getCurrentCreature()
+    {
+        return queue.peek();
     }
 
-    public Creature getCurrentCreature() {
-        return currentCreature;
-    }
-
-    public void next() {
-        Creature oldCreature = currentCreature;
-        if (creaturesQueue.isEmpty()) {
-            endOfTurn();
+    public void nextCreature()
+    {
+        queue.poll();
+        if( queue.isEmpty() )
+        {
+            reinitializeQueue();
         }
-        currentCreature = creaturesQueue.poll();
-        observerSupport.firePropertyChange(NEXT_CREATURE, oldCreature, currentCreature);
     }
 
-    private void endOfTurn() {
-        roundNumber++;
-        initQueue();
-        observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
-    }
-
-    void addObserver(PropertyChangeListener aObserver) {
-        observerSupport.addPropertyChangeListener(aObserver);
+    private void reinitializeQueue()
+    {
+        queue.addAll( allCreatures );
     }
 }

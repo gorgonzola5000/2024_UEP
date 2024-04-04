@@ -1,27 +1,35 @@
+// ******************************************************************
+//  
+// Copyright 2024 PSI Software SE. All rights reserved.
+// PSI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
+//  
+// ******************************************************************
+
 package pl.psi.creatures;
 
 import java.util.Random;
 
-abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
+/**
+ * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+ */
+public class DamageCalculator
 {
-
     public static final int MAX_ATTACK_DIFF = 60;
     public static final int MAX_DEFENCE_DIFF = 12;
     public static final double DEFENCE_BONUS = 0.025;
     public static final double ATTACK_BONUS = 0.05;
-    private final Random rand;
+    private final Random random;
 
-    protected AbstractCalculateDamageStrategy( final Random aRand )
+    public DamageCalculator( Random aRandom )
     {
-        rand = aRand;
+        random = aRandom;
     }
 
-    @Override
-    public int calculateDamage( final Creature aAttacker, final Creature aDefender )
+    int calculateDamage( Creature aAttacker, Creature aDefender )
     {
         final int armor = aDefender.getArmor();
 
-        final int randValue = rand.nextInt( aAttacker.getDamage()
+        final int randValue = random.nextInt( aAttacker.getDamage()
             .upperEndpoint()
             - aAttacker.getDamage()
                 .lowerEndpoint()
@@ -52,6 +60,7 @@ abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
         {
             oneCreatureDamageToDeal = 0;
         }
-        return (int)(aAttacker.getAmount() * oneCreatureDamageToDeal);
+        int dmg = (int)(aAttacker.getAmount() * oneCreatureDamageToDeal);
+        return dmg;
     }
 }
