@@ -4,20 +4,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.psi.Hero;
-import pl.psi.creatures.Creature;
-import pl.psi.gui.MainBattleController;
-import pl.psi.creatures.NecropolisFactory;
-import pl.psi.hero.EconomyHero;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.psi.EconomyHero;
+import pl.psi.Hero;
+import pl.psi.creatures.Creature;
+import pl.psi.creatures.NecropolisFactory;
+import pl.psi.gui.MainBattleController;
 
 public class EcoBattleConverter
 {
 
-    public static void startBattle( final EconomyHero aPlayer1, final EconomyHero aPlayer2 )
+    public static void startBattle( EconomyHero aHero1, EconomyHero aHero2 )
     {
         Scene scene = null;
         try
@@ -25,7 +24,7 @@ public class EcoBattleConverter
             final FXMLLoader loader = new FXMLLoader();
             loader.setLocation( EcoBattleConverter.class.getClassLoader()
                 .getResource( "fxml/main-battle.fxml" ) );
-            loader.setController( new MainBattleController( convert( aPlayer1 ), convert( aPlayer2 ) ) );
+            loader.setController( new MainBattleController( convert( aHero1 ), convert( aHero2 ) ) );
             scene = new Scene( loader.load() );
             final Stage aStage = new Stage();
             aStage.setScene( scene );
@@ -44,8 +43,8 @@ public class EcoBattleConverter
         final List< Creature > creatures = new ArrayList<>();
         final NecropolisFactory factory = new NecropolisFactory();
         aPlayer1.getCreatures()
-            .forEach( ecoCreature -> creatures.add( factory.create( ecoCreature.isUpgraded(),
-                ecoCreature.getTier(), ecoCreature.getAmount() ) ) );
+            .forEach( ecoCreature -> creatures
+                .add( factory.create( ecoCreature.isUpgraded(), ecoCreature.getTier(), 1 ) ) );
         return new Hero( creatures );
     }
 }
