@@ -17,6 +17,7 @@ import pl.psi.converter.EcoBattleConverter;
 @NoArgsConstructor
 public class EcoController implements PropertyChangeListener {
     private EconomyEngine engine;
+
     @FXML
     private GridPane grid;
     @FXML
@@ -57,9 +58,18 @@ public class EcoController implements PropertyChangeListener {
                             (e) -> EcoBattleConverter.startBattle(engine.getStartBattlePack(currentPoint)));
                 }
 
+
                 if (engine.isCurrentHero(currentPoint)) {
                     mapTile.setBackground(Color.GREENYELLOW);
                 }
+
+                if(engine.isInteraction(currentPoint)){
+                    mapTile.setBackground(Color.RED);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                            (e) -> CastleGui.openCastle());
+                }
+
+
                 grid.add(mapTile, x, y);
             }
         }

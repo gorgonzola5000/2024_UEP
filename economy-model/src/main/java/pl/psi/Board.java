@@ -19,6 +19,7 @@ public class Board
     {
         map.put( new Point( 5, 5 ), aHero1 );
         map.put( new Point( MAX_HEIGHT - 5, MAX_WIDTH - 5 ), aHero2 );
+
     }
 
     Optional< EconomyHero > getHero( final Point aPoint )

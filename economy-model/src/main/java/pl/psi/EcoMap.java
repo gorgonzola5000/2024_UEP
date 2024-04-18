@@ -54,4 +54,8 @@ public class EcoMap
     public boolean isBattlePoint(Point aPoint) {
         return map.containsKey(aPoint);
     }
+
+    public boolean isIteractionPoint(Point aPoint){
+        return map.containsKey(aPoint);
+    }
 }
