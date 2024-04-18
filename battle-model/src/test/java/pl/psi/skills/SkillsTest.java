@@ -4,9 +4,8 @@ import com.google.common.collect.Range;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.psi.creatures.Creature;
-import pl.psi.creatures.CreatureStatistic;
+import pl.psi.creatures.CreatureStats;
 
-import java.util.Random;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -16,25 +15,27 @@ public class SkillsTest {
     @Disabled
     void advancedArmorerTest() {
         final int MAX_HP = 200;
-        Creature attacker = new Creature(CreatureStatistic.builder()
+        Creature creatureWithoutArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                 .armor(20)
                 .attack(20)
                 .maxHp(MAX_HP)
-                .speed(12)
+//                .speed(12)
                 .damage(Range.closed(50, 50))
-                .build(), 1);
-        Creature defender = new Creature(CreatureStatistic.builder()
+                .build())
+            .build();
+        Creature creatureWithArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                 .armor(20)
                 .attack(20)
                 .maxHp(MAX_HP)
-                .speed(12)
+//                .speed(12)
                 .damage(Range.closed(50, 50))
-                .build(), 1);
+                .build())
+            .build();
 
-//        hero.castArmorer(2, defender) TODO
-        attacker.attack(defender);
+//        hero.castArmorer(2, creatureWithArmorer) TODO
+        creatureWithoutArmorer.attack(creatureWithArmorer);
 
-        assertThat(defender.getCurrentHp()).isEqualTo(MAX_HP - 45);
-        assertThat(attacker.getCurrentHp()).isEqualTo(MAX_HP - 50);
+        assertThat(creatureWithArmorer.getCurrentHp()).isEqualTo(MAX_HP - 45);
+        assertThat(creatureWithoutArmorer.getCurrentHp()).isEqualTo(MAX_HP - 50);
     }
 }
