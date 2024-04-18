@@ -4,7 +4,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import lombok.NoArgsConstructor;
 import pl.psi.EconomyEngine;
 import pl.psi.EconomyHero;
@@ -12,49 +15,58 @@ import pl.psi.Point;
 import pl.psi.converter.EcoBattleConverter;
 
 @NoArgsConstructor
-public class EcoController implements PropertyChangeListener
-{
-    private EconomyEngine economyEngine;
+public class EcoController implements PropertyChangeListener {
+    private EconomyEngine engine;
     @FXML
     private GridPane grid;
+    @FXML
+    private Button passButton;
 
-    public EcoController( final EconomyHero aHero1, final EconomyHero aHero2 )
-    {
-        economyEngine = new EconomyEngine( aHero1, aHero2 );
+    public EcoController(final EconomyHero aHero1, final EconomyHero aHero2) {
+        engine = new EconomyEngine(aHero1, aHero2);
     }
 
     @FXML
-    void initialize()
-    {
+    void initialize() {
         refreshGui();
-        economyEngine.addObserver( EconomyEngine.HERO_MOVED, this );
-        economyEngine.addObserver( EconomyEngine.ACTIVE_HERO_CHANGED, this );
-        economyEngine.addObserver( EconomyEngine.TURN_END, this );
-
+        engine.addObserver(EconomyEngine.HERO_MOVED, this);
+        engine.addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, this);
+        engine.addObserver(EconomyEngine.TURN_END, this);
+        passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> engine.pass());
     }
 
-    private void goToBattle()
-    {
-        EcoBattleConverter.startBattle( economyEngine.getHero1(), economyEngine.getHero2() );
-    }
-
-    void refreshGui()
-    {
+    void refreshGui() {
         grid.getChildren()
-            .clear();
-        for( int x = 0; x < 15; x++ )
-        {
-            for( int y = 0; y < 10; y++ )
-            {
-                Point currentPoint = new Point( x, y );
-                final MapTile mapTile = new MapTile( "" );
+                .clear();
+        for (int x = 0; x < EconomyEngine.BOARD_WEIGHT; x++) {
+            for (int y = 0; y < EconomyEngine.BOARD_HEIGHT; y++) {
+                Point currentPoint = new Point(x, y);
+                final EcoMapTile mapTile = new EcoMapTile("");
+
+                engine.getHero(currentPoint).ifPresent(h -> mapTile.setName(h.getName()));
+
+                if (engine.canMove(currentPoint)) {
+                    mapTile.setBackground(Color.LIGHTGRAY);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                            (e) -> engine.move(currentPoint));
+                }
+
+                if (engine.isBattlePoint(currentPoint)) {
+                    mapTile.setBackground(Color.RED);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                            (e) -> EcoBattleConverter.startBattle(engine.getStartBattlePack(currentPoint)));
+                }
+
+                if (engine.isCurrentHero(currentPoint)) {
+                    mapTile.setBackground(Color.GREENYELLOW);
+                }
+                grid.add(mapTile, x, y);
             }
         }
     }
 
     @Override
-    public void propertyChange( final PropertyChangeEvent aPropertyChangeEvent )
-    {
+    public void propertyChange(final PropertyChangeEvent aPropertyChangeEvent) {
         refreshGui();
     }
 }

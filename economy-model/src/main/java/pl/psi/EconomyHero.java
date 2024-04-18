@@ -2,6 +2,7 @@ package pl.psi;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -21,10 +22,10 @@ public class EconomyHero implements PropertyChangeListener
     private int currentMovePoints;
     private Resources resources;
 
-    public EconomyHero( String aName, List< EconomyCreature > aCreatures )
+    public EconomyHero( String aName )
     {
         name = aName;
-        creatures = aCreatures;
+        creatures = new ArrayList<>();
         maxMovePoints = 10;
         currentMovePoints = maxMovePoints;
         resources = Resources.startRes();
@@ -43,5 +44,9 @@ public class EconomyHero implements PropertyChangeListener
     void retrieveMovePoints( double aDistance )
     {
         currentMovePoints = (int)Math.ceil( aDistance );
+    }
+
+    public void addCreature(EconomyCreature aEconomyCreature) {
+        creatures.add(aEconomyCreature);
     }
 }
