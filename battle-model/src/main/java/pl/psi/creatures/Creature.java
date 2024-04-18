@@ -69,6 +69,21 @@ public class Creature implements PropertyChangeListener {
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
     }
 
+    public void applyDamage(final int aDamage) {
+        int hpToSubstract = aDamage % this.getMaxHp();
+        int amountToSubstract = Math.round(aDamage / this.getMaxHp());
+
+        int hp = this.getCurrentHp() - hpToSubstract;
+        if (hp <= 0) {
+            this.setCurrentHp(this.getMaxHp() - hp);
+            this.setAmount(this.getAmount() - 1);
+        }
+        else{
+            this.setCurrentHp(hp);
+        }
+        this.setAmount(this.getAmount() - amountToSubstract);
+    }
+
     public int getMaxHp() {
         return stats.getMaxHp();
     }
