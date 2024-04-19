@@ -6,7 +6,7 @@ import java.beans.PropertyChangeEvent;
 
 public class ArmoredCreature extends Creature {
     private final Creature decorated;
-    private int level;
+    private final int  level;
 
     public ArmoredCreature(final Creature decorated, int aLevel) {
         this.decorated = decorated;
