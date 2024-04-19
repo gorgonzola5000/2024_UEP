@@ -4,11 +4,11 @@ import com.google.common.collect.Range;
 
 import java.beans.PropertyChangeEvent;
 
-public class ArmoreredCreature extends Creature {
+public class ArmoredCreature extends Creature {
     private final Creature decorated;
     private int level;
 
-    public ArmoreredCreature(final Creature decorated, int aLevel) {
+    public ArmoredCreature(final Creature decorated, int aLevel) {
         this.decorated = decorated;
         if (aLevel < 1) {
             level = 1;
