@@ -12,11 +12,7 @@ public class ArmoredCreature extends Creature {
         this.decorated = decorated;
         if (aLevel < 1) {
             level = 1;
-        } else if (aLevel > 3) {
-            level = 3;
-        } else {
-            level = aLevel;
-        }
+        } else level = Math.min(aLevel, 3);
     }
 
     public double getMultiplier() {

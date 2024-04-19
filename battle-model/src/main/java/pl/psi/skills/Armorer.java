@@ -14,9 +14,6 @@ public class Armorer extends Skill {
 
     @Override
     public void cast(List<Creature> creatures) {
-        for (int i = 0; i < creatures.size(); i++) {
-            Creature newCreature = new ArmoredCreature(creatures.get(i), level);
-            creatures.set(i, newCreature);
-        }
+        creatures.replaceAll(decorated -> new ArmoredCreature(decorated, level));
     }
 }
