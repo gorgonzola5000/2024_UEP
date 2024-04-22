@@ -3,11 +3,13 @@ package pl.psi.gui;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import pl.psi.EconomyEngine;
 import pl.psi.EconomyHero;
@@ -63,10 +65,12 @@ public class EcoController implements PropertyChangeListener {
                     mapTile.setBackground(Color.GREENYELLOW);
                 }
 
-                if(engine.isInteraction(currentPoint)){
-                    mapTile.setBackground(Color.RED);
-                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                            (e) -> CastleGui.openCastle());
+                if(engine.isCastle(currentPoint)){
+                    mapTile.setBackground(Color.BROWN);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            CastleWindow castleWindow = new CastleWindow();
+                            castleWindow.show();
+                    });
                 }
 
 

@@ -12,11 +12,14 @@ import com.google.common.collect.HashBiMap;
 public class EcoMap
 {
     private final BiMap< Point, EconomyHero > map = HashBiMap.create();
+    private final BiMap<Point, MapObject> mapObjects = HashBiMap.create();
 
+    Castle castle = new Castle();
     public EcoMap(final EconomyHero aHero1, final EconomyHero aHero2, PropertyChangeSupport aObserverSupport)
     {
         map.put( new Point( 5, 5 ), aHero1 );
         map.put( new Point( EconomyEngine.BOARD_WEIGHT - 5, EconomyEngine.BOARD_HEIGHT - 5 ), aHero2 );
+        mapObjects.put(new Point(1,1), castle);
     }
 
     Optional< EconomyHero > getHero( final Point aPoint )
@@ -55,7 +58,7 @@ public class EcoMap
         return map.containsKey(aPoint);
     }
 
-    public boolean isIteractionPoint(Point aPoint){
-        return map.containsKey(aPoint);
+    public boolean isCastlePoint(Point aPoint) {
+        return mapObjects.containsKey(aPoint);
     }
 }

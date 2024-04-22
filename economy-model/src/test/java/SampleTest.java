@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SampleTest {
     @Test
-    void name() {
+    void Name() {
         EconomyHero economyHero = new EconomyHero("Player1");
         economyHero.getResources();
     }

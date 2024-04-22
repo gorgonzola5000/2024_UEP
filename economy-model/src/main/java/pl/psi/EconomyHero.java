@@ -21,6 +21,7 @@ public class EconomyHero implements PropertyChangeListener
     private int maxMovePoints;
     private int currentMovePoints;
     private Resources resources;
+    private Castle castle;
 
     public EconomyHero( String aName )
     {
@@ -49,4 +50,6 @@ public class EconomyHero implements PropertyChangeListener
     public void addCreature(EconomyCreature aEconomyCreature) {
         creatures.add(aEconomyCreature);
     }
+
+
 }

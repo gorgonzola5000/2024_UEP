@@ -67,11 +67,7 @@ public class EconomyEngine {
         return StartBattlePack.builder().attacker(turnQueue.getCurrentHero()).defender(heroToAttack).build();
     }
 
-    public boolean isInteraction(Point currentPoint) {
-        return board.isIteractionPoint(currentPoint) && currentPoint.distance(board.getPosition(turnQueue.getCurrentHero())) < 2;
-    }
-
-    public String getCastleWindow() {
-        return "OKNO";
+    public boolean isCastle(Point aPoint) {
+        return board.isCastlePoint(aPoint) && board.canMove(turnQueue.getCurrentHero(), aPoint) ;
     }
 }
