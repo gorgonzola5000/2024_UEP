@@ -22,10 +22,12 @@ public class GameEngine {
     }
 
     public void attack(final Point point) {
-        board.getCreature(point)
-                .ifPresent(defender -> turnQueue.getCurrentCreature()
-                        .attack(defender));
-        pass();
+        if (canAttack(point)){
+            board.getCreature(point)
+                    .ifPresent(defender -> turnQueue.getCurrentCreature()
+                            .attack(defender));
+            pass();
+        }
     }
 
     public boolean canMove(final Point aPoint) {
@@ -60,5 +62,9 @@ public class GameEngine {
 
     public boolean isCurrentCreature(Point aPoint) {
         return Optional.of(turnQueue.getCurrentCreature()).equals(board.getCreature(aPoint));
+    }
+
+    public Creature getCurrentCreature(){
+        return turnQueue.getCurrentCreature();
     }
 }
