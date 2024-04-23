@@ -68,6 +68,6 @@ public class EconomyEngine {
     }
 
     public boolean isCastle(Point aPoint) {
-        return board.isCastlePoint(aPoint) && board.canMove(turnQueue.getCurrentHero(), aPoint) ;
+        return board.isCastlePoint(aPoint);
     }
 }

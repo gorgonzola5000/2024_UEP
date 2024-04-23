@@ -68,8 +68,10 @@ public class EcoController implements PropertyChangeListener {
                 if(engine.isCastle(currentPoint)){
                     mapTile.setBackground(Color.BROWN);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                            CastleWindow castleWindow = new CastleWindow();
-                            castleWindow.show();
+                            if(engine.isCurrentHero(currentPoint)) {
+                                CastleWindow castleWindow = new CastleWindow();
+                                castleWindow.show();
+                            }
                     });
                 }
 
