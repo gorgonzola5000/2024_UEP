@@ -55,7 +55,10 @@ public enum CreatureStatistic implements CreatureStatisticIf
     //WAR MACHINES
     FIRST_AID_TENT("First Aid Tent",0,0,75,0,Range.closed(0,0),8,
             "Heals a small amount of hit points to a top creature in one of your stacks every round. The effect is very weak. First Aid skill gives you control over the tent and makes it heal more hit points, but the tent is extremely easy to destroy, rendering your First Aid skill useless for the rest of the battle - see note on Artillery above. The tent, however, can save you losing a few high-level creatures by topping up their hit points every round.",
-            true); //
+            true),//
+    BALLISTA("Ballista",10,10,250,0,Range.closed(0,0),9,
+            "Ballista is affected by hero's attack still, and unless your hero has a strong attack AND Artillery secondary skill, ballista will not do much damage, buy 2500 gold worth of creatures instead. If you are going for Artillery secondary skill, keep in mind that ballista only has 250 hit points, and once destroyed, the skill will remain useless for the rest of the battle. That is why heroes should choose Offense, Armourer, etc over Artillery. Note: without Artillery secondary skill, ballista will shoot without your control.",
+            true);//
 
 
 
