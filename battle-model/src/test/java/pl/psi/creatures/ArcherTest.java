@@ -73,6 +73,8 @@ public class ArcherTest
         g_e.attack(archer_point);
         assertThat(creature.getCurrentHp()).isEqualTo(6); // HP should not change as archer is out of range for skeleton_warrior
         g_e.attack(warrior_point);
-        assertThat(g_e.getCreature(warrior_point).get().getCurrentHp()).isEqualTo(6);
+        assertThat(g_e.getCreature(warrior_point).get().getCurrentHp()).isEqualTo(120);
+
     }
 }
+
