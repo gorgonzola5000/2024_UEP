@@ -48,7 +48,10 @@ public enum CreatureStatistic implements CreatureStatisticIf
         true ), //
     GHOST_DRAGON( "Ghost Dragon", 19, 17, 200, 14, Range.closed( 25, 50 ), 7,
         "When situation seems hopeless, take a chance on the best enemy stack! If you'll get lucky, half their hit points will be gone instantly!! Ageing ability makes ghost dragons as dangerous as other lvl7 creatures.\nSpecial: -1 to enemy morale ; 20% chance to age enemy (halve hit points of all stack members).\n",
-        true );//
+        true ),
+    ARCHER("Archer",6,3,10,4,Range.closed(2,3),7,
+            "Archers and marksmen are lightly armored troops armed with crossbows for ranged combat and daggers for light hand-to-hand fighting. Marksmen can get off two shots in each ranged attack",
+            false);//
 
     private final String name;
     private final int attack;

@@ -28,16 +28,18 @@ public class Creature implements PropertyChangeListener {
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
+    private AttackIf canAttackStrategy;
 
     Creature() {
     }
 
     private Creature(final CreatureStatisticIf aStats, final DamageCalculatorIf aCalculator,
-                     final int aAmount) {
+                     final int aAmount, final AttackIf aCanAttackStrategy) {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
+        canAttackStrategy = aCanAttackStrategy;
     }
 
     public void attack(final Creature aDefender) {
@@ -115,6 +117,8 @@ public class Creature implements PropertyChangeListener {
         return stats.getName();
     }
 
+
+
     public int getMoveRange() {
         return stats.getMoveRange();
     }
@@ -123,6 +127,7 @@ public class Creature implements PropertyChangeListener {
         private int amount = 1;
         private DamageCalculatorIf calculator = new DefaultDamageCalculator(new Random());
         private CreatureStatisticIf statistic;
+        private AttackIf canAttackStrategy = new DefaultAttack();
 
         public Builder statistic(final CreatureStatisticIf aStatistic) {
             statistic = aStatistic;
@@ -134,13 +139,18 @@ public class Creature implements PropertyChangeListener {
             return this;
         }
 
+        public Builder canAttack(final AttackIf aCanAttackStrategy) {
+            canAttackStrategy = aCanAttackStrategy;
+            return this;
+        }
+
         Builder calculator(final DamageCalculatorIf aCalc) {
             calculator = aCalc;
             return this;
         }
 
         public Creature build() {
-            return new Creature(statistic, calculator, amount);
+            return new Creature(statistic, calculator, amount, canAttackStrategy);
         }
     }
 

@@ -5,7 +5,7 @@ package pl.psi.creatures;
  */
 public class CastleCreatureFactory
 {
-    public Creature create( final int aTier, final boolean aIsUpgraded, final int aAmount )
+    public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount )
     {
         if( aIsUpgraded )
         {
@@ -14,6 +14,11 @@ public class CastleCreatureFactory
                 case 1:
                     return new Creature.Builder().statistic( CreatureStatistic.BLACK_KNIGHT )
                         .amount( aAmount )
+                        .build();
+                case 2:
+                    return new Creature.Builder().statistic(CreatureStatistic.ARCHER)
+                        .amount(aAmount)
+                            .canAttack(new RangedAttackStrategy())
                         .build();
             }
         }
@@ -24,6 +29,10 @@ public class CastleCreatureFactory
                 case 1:
                     return new Creature.Builder().statistic( CreatureStatistic.BLACK_KNIGHT )
                         .amount( aAmount )
+                        .build();
+                case 2:
+                    return new Creature.Builder().statistic(CreatureStatistic.ARCHER)
+                        .amount(aAmount)
                         .build();
             }
         }

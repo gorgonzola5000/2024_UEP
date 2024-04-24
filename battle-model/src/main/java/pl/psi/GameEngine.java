@@ -53,11 +53,13 @@ public class GameEngine {
     }
 
     public boolean canAttack(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentCreature())
-                .distance(point);
-        return board.getCreature(point)
-                .isPresent()
-                && distance < 2 && distance > 0;
+//        double distance = board.getPosition(turnQueue.getCurrentCreature())
+//                .distance(point);
+//        return board.getCreature(point)
+//                .isPresent()
+//                && distance < 2 && distance > 0;
+        Creature currentCreature = turnQueue.getCurrentCreature();
+        return currentCreature.getCanAttackStrategy().canAttack(board.getPosition(currentCreature), point) && board.getCreature(point).isPresent();
     }
 
     public boolean isCurrentCreature(Point aPoint) {
