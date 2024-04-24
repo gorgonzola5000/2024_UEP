@@ -2,17 +2,13 @@ package pl.psi.creatures;
 
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.Test;
-import pl.psi.creatures.Creature;
-import pl.psi.creatures.CreatureStats;
-import pl.psi.creatures.MachineFactor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class MachineFactorTest {
+class MachineFactoryTest {
 
     private static final Range<Integer> NOT_IMPORTANT_DMG = Range.closed(0, 0);
 
@@ -33,10 +29,10 @@ class MachineFactorTest {
                         .armor(10)
                         .build())
                 .build();
-        MachineFactor machineFactor = new MachineFactor();
+        MachineFactory machineFactory = new MachineFactory();
         // when
         angel.attack(dragon);
-        machineFactor.HealHPCreature(dragon);
+        machineFactory.HealHPCreature(dragon);
         // then
         assertThat(dragon.getCurrentHp()).isEqualTo(dragon.getMaxHp());
     }
@@ -65,14 +61,14 @@ class MachineFactorTest {
                         .armor(5)
                         .build())
                 .build();
-        MachineFactor machineFactor = new MachineFactor();
+        MachineFactory machineFactory = new MachineFactory();
         List<Creature> creaturesList = new ArrayList<Creature>();
         creaturesList.add(dragon);
         creaturesList.add(magic);
         // when
         angel.attack(dragon);
         angel.attack(magic);
-        machineFactor.ChooseHealCreature(creaturesList);
+        machineFactory.ChooseHealCreature(creaturesList);
 
         // then
         assertThat(dragon.getCurrentHp()).isEqualTo(70);

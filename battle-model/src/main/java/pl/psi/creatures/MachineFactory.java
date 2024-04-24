@@ -2,7 +2,7 @@ package pl.psi.creatures;
 
 import java.util.List;
 
-public class MachineFactor {
+public class MachineFactory extends Creature {
 
     public void HealHPCreature(Creature creature) {
         creature.restoreCurrentHpToMax();
