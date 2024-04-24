@@ -32,7 +32,7 @@ class MachineFactoryTest {
         MachineFactory machineFactory = new MachineFactory();
         // when
         angel.attack(dragon);
-        machineFactory.HealHPCreature(dragon);
+        machineFactory.healHPCreature(dragon);
         // then
         assertThat(dragon.getCurrentHp()).isEqualTo(dragon.getMaxHp());
     }
@@ -68,7 +68,7 @@ class MachineFactoryTest {
         // when
         angel.attack(dragon);
         angel.attack(magic);
-        machineFactory.ChooseHealCreature(creaturesList);
+        machineFactory.chooseHealCreature(creaturesList);
 
         // then
         assertThat(dragon.getCurrentHp()).isEqualTo(70);

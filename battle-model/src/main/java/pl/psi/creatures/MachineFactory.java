@@ -4,11 +4,11 @@ import java.util.List;
 
 public class MachineFactory extends Creature {
 
-    public void HealHPCreature(Creature creature) {
+    public void healHPCreature(Creature creature) {
         creature.restoreCurrentHpToMax();
     }
 
-    public void ChooseHealCreature(List<Creature> creatureList) {
+    public void chooseHealCreature(List<Creature> creatureList) {
         Creature smallHP = creatureList.get(0);
         for (Creature creature : creatureList) {
             if (creature.getCurrentHp()<smallHP.getCurrentHp()){
@@ -16,7 +16,7 @@ public class MachineFactory extends Creature {
             }
 
         }
-        HealHPCreature(smallHP);
+        healHPCreature(smallHP);
 
     }
 
