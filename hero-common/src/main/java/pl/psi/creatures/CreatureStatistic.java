@@ -7,7 +7,9 @@ import lombok.Getter;
 @Getter
 public enum CreatureStatistic implements CreatureStatisticIf
 {
+
     // NECROPILIS FRACTION
+
     SKELETON( "Skeleton", 5, 4, 6, 4, Range.closed( 1, 3 ), 1,
         "Average lvl1 foot soldier, but always in huge numbers thanks to necromancy skill and skeleton transformer.",
         false ), //
@@ -48,7 +50,16 @@ public enum CreatureStatistic implements CreatureStatisticIf
         true ), //
     GHOST_DRAGON( "Ghost Dragon", 19, 17, 200, 14, Range.closed( 25, 50 ), 7,
         "When situation seems hopeless, take a chance on the best enemy stack! If you'll get lucky, half their hit points will be gone instantly!! Ageing ability makes ghost dragons as dangerous as other lvl7 creatures.\nSpecial: -1 to enemy morale ; 20% chance to age enemy (halve hit points of all stack members).\n",
-        true );//
+        true ),//
+
+    //WAR MACHINES
+    FIRST_AID_TENT("First Aid Tent",0,0,75,0,Range.closed(0,0),8,
+            "Heals a small amount of hit points to a top creature in one of your stacks every round. The effect is very weak. First Aid skill gives you control over the tent and makes it heal more hit points, but the tent is extremely easy to destroy, rendering your First Aid skill useless for the rest of the battle - see note on Artillery above. The tent, however, can save you losing a few high-level creatures by topping up their hit points every round.",
+            true); //
+
+
+
+
 
     private final String name;
     private final int attack;
