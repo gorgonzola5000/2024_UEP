@@ -14,7 +14,7 @@ public class CastleWindow extends Stage {
     public CastleWindow() {
         VBox root = new VBox();
 
-        Text titleText = new Text("DUPA");
+        Text titleText = new Text("TEKST");
         root.getChildren().add(titleText);
 
         Scene scene = new Scene(root, 400, 300);

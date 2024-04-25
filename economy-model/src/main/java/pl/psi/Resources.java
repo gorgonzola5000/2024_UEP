@@ -25,6 +25,10 @@ public class Resources
     private final int cristals;
     private final int gems;
 
+    Resources subtract(Resources aResourcesToSubstract){
+        return Resources.builder().gold(this.gold - aResourcesToSubstract.getGold()).build();
+    }
+
     public static Resources startRes(){
         return Resources.builder()
                 .gold(15000)
