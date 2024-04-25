@@ -10,11 +10,11 @@ public abstract class Skill {
 
     int level;
     @Getter
-    SkillEnum skillEnum;
+    SkillEnum skillName;
 
     public Skill(SkillEnum aSkillEnum, int aLevel) {
         level = aLevel;
-        skillEnum = aSkillEnum;
+        skillName = aSkillEnum;
     }
 
     public void cast(List<Creature> creatures) {

@@ -5,9 +5,9 @@ import pl.psi.creatures.Creature;
 
 import java.util.List;
 
-public class Armorer extends Skill {
+public class ArmorerSkill extends Skill {
 
-    public Armorer(int aLevel) {
+    public ArmorerSkill(int aLevel) {
         super(SkillEnum.ARMORER, aLevel);
     }
 

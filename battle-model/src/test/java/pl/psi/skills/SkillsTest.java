@@ -74,7 +74,7 @@ public class SkillsTest {
         ArrayList<Creature> creatureList = new ArrayList<>();
         creatureList.add(creatureToArmor);
         Hero aHero = new Hero(creatureList);
-        aHero.addSkill(new Armorer(2));
+        aHero.addSkill(new ArmorerSkill(2));
         aHero.castSkill(SkillEnum.ARMORER);
 //        creatureWithoutArmorer.attack(creatureToArmor);
         //then
