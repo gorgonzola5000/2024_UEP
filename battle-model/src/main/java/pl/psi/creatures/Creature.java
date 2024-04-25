@@ -11,11 +11,13 @@ import java.beans.PropertyChangeListener;
 import java.util.Random;
 
 import lombok.Setter;
+import pl.psi.enums.AttackTypeEnum;
 import pl.psi.TurnQueue;
 
 import com.google.common.collect.Range;
 
 import lombok.Getter;
+import pl.psi.enums.CreatureTypeEnum;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -28,6 +30,9 @@ public class Creature implements PropertyChangeListener {
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
+    private CreatureTypeEnum creatureType;
+    private AttackTypeEnum attackType;
+    private DamageApplier damageApplier;
 
     Creature() {
     }
@@ -43,7 +48,10 @@ public class Creature implements PropertyChangeListener {
     public void attack(final Creature aDefender) {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
-            applyDamage(aDefender, damage);
+            DamageCalculatorIf.DamageValueObject damageObject = new DamageCalculatorIf.DamageValueObject(damage, this.attackType, this.creatureType);
+//            applyDamage(aDefender, damage);
+
+            aDefender.applyDamage(damageObject);
             if (canCounterAttack(aDefender)) {
                 counterAttack(aDefender);
             }
@@ -54,19 +62,19 @@ public class Creature implements PropertyChangeListener {
         return getAmount() > 0;
     }
 
-    private void applyDamage(final Creature aDefender, final int aDamage) {
-        int hpToSubstract = aDamage % aDefender.getMaxHp();
-        int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
+    private void applyDamage(DamageCalculatorIf.DamageValueObject aDamageValueObject) {
+        int hpToSubstract = aDamageValueObject.getDamageAmount() % this.getMaxHp();
+        int amountToSubstract = Math.round(aDamageValueObject.getDamageAmount() / this.getMaxHp());
 
-        int hp = aDefender.getCurrentHp() - hpToSubstract;
+        int hp = this.getCurrentHp() - hpToSubstract;
         if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
-            aDefender.setAmount(aDefender.getAmount() - 1);
+            this.setCurrentHp(this.getMaxHp() - hp);
+            this.setAmount(this.getAmount() - 1);
         }
         else{
-            aDefender.setCurrentHp(hp);
+            this.setCurrentHp(hp);
         }
-        aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
+        this.setAmount(this.getAmount() - amountToSubstract);
     }
 
     public int getMaxHp() {
@@ -84,7 +92,8 @@ public class Creature implements PropertyChangeListener {
     private void counterAttack(final Creature aAttacker) {
         final int damage = aAttacker.getCalculator()
                 .calculateDamage(aAttacker, this);
-        applyDamage(this, damage);
+        DamageCalculatorIf.DamageValueObject aDamageValueObject = new DamageCalculatorIf.DamageValueObject(damage, this.attackType, this.creatureType);
+        applyDamage(aDamageValueObject);
         aAttacker.counterAttackCounter--;
     }
 

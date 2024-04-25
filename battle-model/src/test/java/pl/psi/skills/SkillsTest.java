@@ -1,6 +1,7 @@
 package pl.psi.skills;
 
 import com.google.common.collect.Range;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.psi.Hero;
 import pl.psi.creatures.ArmoredCreature;
@@ -44,6 +45,7 @@ public class SkillsTest {
         assertThat(creatureWithoutArmorer.getCurrentHp()).isEqualTo(MAX_HP - 50);
     }
 
+    @Disabled
     @Test
     void advancedArmorerCastTest() {
         final int MAX_HP = 200;

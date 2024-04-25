@@ -30,4 +30,6 @@ public class Hero {
     public void addSkill(Skill aSkill) {
         skills.put(aSkill.getSkillName(), aSkill);
     }
+
+
 }
