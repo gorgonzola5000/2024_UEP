@@ -33,7 +33,8 @@ public class CastleCreatureFactory
                 case 2:
                     return new Creature.Builder().statistic(CreatureStatistic.ARCHER)
                         .amount(aAmount)
-                        .build();
+                            .canAttack(new RangedAttackStrategy())
+                            .build();
             }
         }
         throw new IllegalArgumentException( "Cannot recognize creature by tier and upgrade or not." );
