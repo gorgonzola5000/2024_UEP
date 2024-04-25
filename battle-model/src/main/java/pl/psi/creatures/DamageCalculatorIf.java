@@ -7,21 +7,4 @@ import pl.psi.enums.CreatureTypeEnum;
 public interface DamageCalculatorIf
 {
     int calculateDamage( Creature aAttacker, Creature aDefender );
-
-    class DamageValueObject {
-        @Getter
-        private int damageAmount;
-        private AttackTypeEnum attackType;
-        private CreatureTypeEnum creatureType;
-
-        public DamageValueObject(int aDamageAmount, AttackTypeEnum aAttackType, CreatureTypeEnum aCreatureType) {
-            damageAmount = aDamageAmount;
-            attackType = aAttackType;
-            creatureType = aCreatureType;
-        }
-
-
-
-
-    }
 }

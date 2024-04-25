@@ -48,7 +48,7 @@ public class Creature implements PropertyChangeListener {
     public void attack(final Creature aDefender) {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
-            DamageCalculatorIf.DamageValueObject damageObject = new DamageCalculatorIf.DamageValueObject(damage, this.attackType, this.creatureType);
+            DamageValueObject damageObject = new DamageValueObject(damage, this.attackType, this.creatureType);
 //            applyDamage(aDefender, damage);
 
             aDefender.applyDamage(damageObject);
@@ -62,19 +62,19 @@ public class Creature implements PropertyChangeListener {
         return getAmount() > 0;
     }
 
-    private void applyDamage(DamageCalculatorIf.DamageValueObject aDamageValueObject) {
-        int hpToSubstract = aDamageValueObject.getDamageAmount() % this.getMaxHp();
-        int amountToSubstract = Math.round(aDamageValueObject.getDamageAmount() / this.getMaxHp());
-
-        int hp = this.getCurrentHp() - hpToSubstract;
-        if (hp <= 0) {
-            this.setCurrentHp(this.getMaxHp() - hp);
-            this.setAmount(this.getAmount() - 1);
-        }
-        else{
-            this.setCurrentHp(hp);
-        }
-        this.setAmount(this.getAmount() - amountToSubstract);
+    private void applyDamage(DamageValueObject aDamageValueObject) {
+//        int hpToSubstract = aDamageValueObject.getDamageAmount() % this.getMaxHp();
+//        int amountToSubstract = Math.round(aDamageValueObject.getDamageAmount() / this.getMaxHp());
+//
+//        int hp = this.getCurrentHp() - hpToSubstract;
+//        if (hp <= 0) {
+//            this.setCurrentHp(this.getMaxHp() - hp);
+//            this.setAmount(this.getAmount() - 1);
+//        }
+//        else{
+//            this.setCurrentHp(hp);
+//        }
+//        this.setAmount(this.getAmount() - amountToSubstract);
     }
 
     public int getMaxHp() {
