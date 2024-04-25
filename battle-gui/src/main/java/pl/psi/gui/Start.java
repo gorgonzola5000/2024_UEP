@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.psi.creatures.CastleCreatureFactory;
 import pl.psi.creatures.NecropolisFactory;
 
 public class Start extends Application
@@ -54,7 +55,7 @@ public class Start extends Application
 
     private Hero createP1()
     {
-        final Hero ret = new Hero( List.of( new NecropolisFactory().create( false, 1, 5 ) ) );
+        final Hero ret = new Hero( List.of( new CastleCreatureFactory().create( false, 2, 5 ) ) );
         return ret;
     }
 
