@@ -92,7 +92,7 @@ public class Creature implements PropertyChangeListener {
     private void counterAttack(final Creature aAttacker) {
         final int damage = aAttacker.getCalculator()
                 .calculateDamage(aAttacker, this);
-        DamageCalculatorIf.DamageValueObject aDamageValueObject = new DamageCalculatorIf.DamageValueObject(damage, this.attackType, this.creatureType);
+        DamageValueObject aDamageValueObject = new DamageValueObject(damage, this.attackType, this.creatureType);
         applyDamage(aDamageValueObject);
         aAttacker.counterAttackCounter--;
     }
