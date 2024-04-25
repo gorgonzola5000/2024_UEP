@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MachineFactory
 {   private static final String EXCEPTION_MESSAGE = "Name not found";
-    public Creature create( final String aNam)
+    public Creature create( final String aName)
     {
             switch( aName )
             {
