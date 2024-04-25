@@ -3,24 +3,20 @@ package pl.psi.creatures;
 import java.util.List;
 
 public class MachineFactory
-{   private static final String EXCEPTION_MESSAGE = "We support tiers from 8 to 10";
-    public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount )
+{   private static final String EXCEPTION_MESSAGE = "Name not found";
+    public Creature create( final String aName)
     {
-            switch( aTier )
+            switch( aName )
             {
-                case 8:
+                case "First Aid Tent":
                     return new Creature.Builder().statistic( CreatureStatistic.FIRST_AID_TENT )
-                            .amount( aAmount )
                             .build();
-                case 9:
+                case "Ballista":
                     return new Creature.Builder().statistic( CreatureStatistic.BALLISTA )
-                            .amount( aAmount )
                             .build();
-                case 10:
+                case "Catapult":
                     return new Creature.Builder().statistic( CreatureStatistic.CATAPULT )
-                            .amount( aAmount )
                             .build();
-
                 default:
                     throw new IllegalArgumentException( EXCEPTION_MESSAGE );
             }
