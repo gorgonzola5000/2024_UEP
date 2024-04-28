@@ -1,6 +1,5 @@
 package pl.psi.skills;
 
-import pl.psi.creatures.ArmoredDamageApplier;
 import pl.psi.creatures.Creature;
 import pl.psi.enums.SkillEnum;
 
@@ -14,6 +13,6 @@ public class ArmorerSkill extends Skill {
 
     @Override
     public void cast(List<Creature> creatures) {
-        creatures.forEach(c -> c.setDamageApplier(new ArmoredDamageApplier(c.getDamageApplier(), level)));
+        creatures.forEach(c -> c.decorateDamageApplier(SkillEnum.ARMORER, level));
     }
 }

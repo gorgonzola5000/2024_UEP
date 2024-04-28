@@ -18,6 +18,7 @@ import com.google.common.collect.Range;
 
 import lombok.Getter;
 import pl.psi.enums.CreatureTypeEnum;
+import pl.psi.enums.SkillEnum;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -32,7 +33,6 @@ public class Creature implements PropertyChangeListener {
     private DamageCalculatorIf calculator;
     private CreatureTypeEnum creatureType;
     private AttackTypeEnum attackType;
-    @Setter //wydaje mi sie ze ok rozwiazanie kiedy chcemy dekorowac tylko Appliera
     private DamageApplier damageApplier;
 
     Creature() {
@@ -88,6 +88,21 @@ public class Creature implements PropertyChangeListener {
         applyDamage(aDamageValueObject);
         aAttacker.counterAttackCounter--;
     }
+
+    public void decorateDamageApplier(SkillEnum aSkillEnum, int level) {
+        switch (aSkillEnum) {
+            case ARMORER:
+                damageApplier = new ArmoredDamageApplierDecorator(damageApplier, level);
+        }
+    }
+
+    public void decorateCalculator(SkillEnum aSkillEnum, int level) {
+        switch (aSkillEnum) {
+            case OFFENSE:
+                calculator = new OffenseCalculatorDecorator(calculator, level);
+        }
+    }
+
 
     Range<Integer> getDamage() {
         return stats.getDamage();

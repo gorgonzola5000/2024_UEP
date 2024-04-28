@@ -2,15 +2,13 @@ package pl.psi.creatures;
 
 import pl.psi.enums.AttackTypeEnum;
 
-public class ArmoredDamageApplier extends DamageApplier {
+public class ArmoredDamageApplierDecorator extends DamageApplier {
     private final int level;
     private final DamageApplier decorated;
 
-    public ArmoredDamageApplier(DamageApplier aDecorated, int aLevel) {
+    public ArmoredDamageApplierDecorator(DamageApplier aDecorated, int aLevel) {
         decorated = aDecorated;
-        if (aLevel < 1) {
-            level = 1;
-        } else level = Math.min(aLevel, 3);
+        level = aLevel;
     }
 
     private double getMultiplier() {

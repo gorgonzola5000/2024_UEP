@@ -14,12 +14,20 @@ public abstract class Skill {
     protected SkillEnum skillName;
 
     public Skill(SkillEnum aSkillEnum, int aLevel) {
-        level = aLevel;
+        level = validateLevel(aLevel);
         skillName = aSkillEnum;
     }
 
     public void cast(List<Creature> creatures) {
 
+    }
+
+    public int validateLevel(int aLevel) {
+        int levelToReturn;
+        if (aLevel < 1) {
+            levelToReturn = 1;
+        } else levelToReturn = Math.min(aLevel, 3);
+        return levelToReturn;
     }
 
     @Override
