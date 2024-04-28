@@ -9,9 +9,9 @@ import java.util.Objects;
 
 public abstract class Skill {
 
-    int level;
+    protected int level;
     @Getter
-    SkillEnum skillName;
+    protected SkillEnum skillName;
 
     public Skill(SkillEnum aSkillEnum, int aLevel) {
         level = aLevel;

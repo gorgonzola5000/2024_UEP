@@ -29,9 +29,8 @@ public class ArmoredDamageApplier extends DamageApplier {
     @Override
     public void applyDamage(DamageValueObject aDamageValueObject) {
         int dmg = calculateDamage(aDamageValueObject);
-        int hpToSubtract = dmg % getCreature().getMaxHp();
-        int amountToSubtract = Math.round(dmg / getCreature().getMaxHp());
-        
+        int hpToSubtract = decorated.calculateHpToSubtract(dmg);
+        int amountToSubtract = decorated.calculateAmountToSubtract(dmg);
         decorated.dealDamageToCreature(hpToSubtract, amountToSubtract);
     }
 

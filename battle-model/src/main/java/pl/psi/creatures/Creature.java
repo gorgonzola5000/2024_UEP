@@ -124,8 +124,8 @@ public class Creature implements PropertyChangeListener {
         private int amount = 1;
         private DamageCalculatorIf calculator = new DefaultDamageCalculator(new Random());
         private CreatureStatisticIf statistic;
-        private CreatureTypeEnum creatureType = CreatureTypeEnum.GROUND;
-        private AttackTypeEnum attackType = AttackTypeEnum.MELEE;
+        private final CreatureTypeEnum creatureType = CreatureTypeEnum.GROUND;
+        private final AttackTypeEnum attackType = AttackTypeEnum.MELEE;
 
         public Builder statistic(final CreatureStatisticIf aStatistic) {
             statistic = aStatistic;
