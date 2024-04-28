@@ -32,19 +32,23 @@ public class Creature implements PropertyChangeListener {
     private DamageCalculatorIf calculator;
     private CreatureTypeEnum creatureType;
     private AttackTypeEnum attackType;
+    @Setter //wydaje mi sie ze ok rozwiazanie kiedy chcemy dekorowac tylko Appliera
     private DamageApplier damageApplier;
 
     Creature() {
     }
 
     private Creature(final CreatureStatisticIf aStats, final DamageCalculatorIf aCalculator,
-                     final int aAmount) {
+                     final int aAmount, CreatureTypeEnum aCreatureType, AttackTypeEnum aAttackType) {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
         damageApplier = new DamageApplier(this); //maybe should initialize it like counterAttackCounter
+        creatureType = aCreatureType;
+        attackType = aAttackType;
     }
+
 
     public void attack(final Creature aDefender) {
         if (isAlive()) {
@@ -120,6 +124,8 @@ public class Creature implements PropertyChangeListener {
         private int amount = 1;
         private DamageCalculatorIf calculator = new DefaultDamageCalculator(new Random());
         private CreatureStatisticIf statistic;
+        private CreatureTypeEnum creatureType = CreatureTypeEnum.GROUND;
+        private AttackTypeEnum attackType = AttackTypeEnum.MELEE;
 
         public Builder statistic(final CreatureStatisticIf aStatistic) {
             statistic = aStatistic;
@@ -137,7 +143,7 @@ public class Creature implements PropertyChangeListener {
         }
 
         public Creature build() {
-            return new Creature(statistic, calculator, amount);
+            return new Creature(statistic, calculator, amount, creatureType, attackType);
         }
     }
 

@@ -14,7 +14,7 @@ public class DamageApplier {
     }
 
     public void applyDamage(DamageValueObject aDamageValueObject) {
-        int hpToSubstract = calculateHpToSubtract(aDamageValueObject);
+        int hpToSubstract = aDamageValueObject.getDamageAmount() % getCreature().getMaxHp();
         int amountToSubstract = Math.round(aDamageValueObject.getDamageAmount() / getCreature().getMaxHp());
 
         int hp = getCreature().getCurrentHp() - hpToSubstract;
@@ -28,7 +28,4 @@ public class DamageApplier {
         getCreature().setAmount(getCreature().getAmount() - amountToSubstract);
     }
 
-    protected int calculateHpToSubtract(DamageValueObject aDamageValueObject) {
-        return aDamageValueObject.getDamageAmount() % getCreature().getMaxHp();
-    }
 }
