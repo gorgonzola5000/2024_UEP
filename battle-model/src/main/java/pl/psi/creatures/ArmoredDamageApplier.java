@@ -28,24 +28,19 @@ public class ArmoredDamageApplier extends DamageApplier {
 
     @Override
     public void applyDamage(DamageValueObject aDamageValueObject) {
-        int hpToSubstract = calculateHpToSubtract(aDamageValueObject);
-        int amountToSubstract = Math.round(aDamageValueObject.getDamageAmount() / getCreature().getMaxHp());
-        int hp = getCreature().getCurrentHp() - hpToSubstract;
-        if (hp <= 0) {
-            getCreature().setCurrentHp(getCreature().getMaxHp() - hp);
-            getCreature().setAmount(getCreature().getAmount() - 1);
-        } else {
-            getCreature().setCurrentHp(hp);
-        }
-        getCreature().setAmount(getCreature().getAmount() - amountToSubstract);
+        int dmg = calculateDamage(aDamageValueObject);
+        int hpToSubtract = dmg % getCreature().getMaxHp();
+        int amountToSubtract = Math.round(dmg / getCreature().getMaxHp());
+        
+        decorated.dealDamageToCreature(hpToSubtract, amountToSubtract);
     }
 
-    private int calculateHpToSubtract(DamageValueObject aDamageValueObject) {
-        int hpToSubtract = aDamageValueObject.getDamageAmount() % getCreature().getMaxHp();
+    private int calculateDamage(DamageValueObject aDamageValueObject) {
+        int dmg = aDamageValueObject.getDamageAmount();
         if (aDamageValueObject.getAttackType().equals(AttackTypeEnum.MELEE) || aDamageValueObject.getAttackType().equals(AttackTypeEnum.RANGE)) {
-            return (int) (hpToSubtract * getMultiplier());
+            return (int) (dmg * getMultiplier());
         }
-        return hpToSubtract;
+        return dmg;
     }
 
     @Override
