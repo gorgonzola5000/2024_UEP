@@ -43,14 +43,13 @@ public class Creature implements PropertyChangeListener {
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
+        damageApplier = new DamageApplier(this); //maybe should initialize it like counterAttackCounter
     }
 
     public void attack(final Creature aDefender) {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             DamageValueObject damageObject = new DamageValueObject(damage, this.attackType, this.creatureType);
-//            applyDamage(aDefender, damage);
-
             aDefender.applyDamage(damageObject);
             if (canCounterAttack(aDefender)) {
                 counterAttack(aDefender);
@@ -63,19 +62,7 @@ public class Creature implements PropertyChangeListener {
     }
 
     private void applyDamage(DamageValueObject aDamageValueObject) {
-        int hpToSubstract = aDamageValueObject.getDamageAmount() % this.getMaxHp();
-        int amountToSubstract = Math.round(aDamageValueObject.getDamageAmount() / this.getMaxHp());
-
-        int hp = this.getCurrentHp() - hpToSubstract;
-        if (hp <= 0) {
-            this.setCurrentHp(this.getMaxHp() - hp);
-            this.setAmount(this.getAmount() - 1);
-        }
-        else{
-            this.setCurrentHp(hp);
-        }
-        this.setAmount(this.getAmount() - amountToSubstract);
-        //TODO move this to DamageApplierObject
+        getDamageApplier().applyDamage(aDamageValueObject);
     }
 
     public int getMaxHp() {

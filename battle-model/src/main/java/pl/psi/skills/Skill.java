@@ -2,6 +2,7 @@ package pl.psi.skills;
 
 import lombok.Getter;
 import pl.psi.creatures.Creature;
+import pl.psi.enums.SkillEnum;
 
 import java.util.List;
 import java.util.Objects;

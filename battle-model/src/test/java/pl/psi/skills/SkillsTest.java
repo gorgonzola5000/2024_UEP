@@ -7,6 +7,7 @@ import pl.psi.Hero;
 import pl.psi.creatures.ArmoredCreature;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.CreatureStats;
+import pl.psi.enums.SkillEnum;
 
 
 import java.util.ArrayList;
@@ -19,14 +20,15 @@ public class SkillsTest {
     void advancedArmoredCreatureTest() {
         final int MAX_HP = 200;
 
-        Creature creatureToArmor = new Creature.Builder().statistic(CreatureStats.builder()
+        Creature creatureWithArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
                         .attack(20)
                         .maxHp(MAX_HP)
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-
+//       creatureWithArmorer(new ArmoredDamageApplier(creatureWithArmorer.getDamageApplier(), 2));
+//        creatureWithArmorer = new ArmoredCreature(creatureWithArmorer, 2);
         Creature creatureWithoutArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
                         .attack(20)
@@ -35,13 +37,12 @@ public class SkillsTest {
                         .build())
                 .build();
 
-        creatureToArmor = new ArmoredCreature(creatureToArmor, 2);
 
         //when
-        creatureWithoutArmorer.attack(creatureToArmor);
+        creatureWithoutArmorer.attack(creatureWithArmorer);
 
         //then
-        assertThat(creatureToArmor.getCurrentHp()).isEqualTo(MAX_HP - 45);
+        assertThat(creatureWithArmorer.getCurrentHp()).isEqualTo(MAX_HP - 45);
         assertThat(creatureWithoutArmorer.getCurrentHp()).isEqualTo(MAX_HP - 50);
     }
 

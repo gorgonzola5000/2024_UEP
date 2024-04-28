@@ -1,4 +1,4 @@
-package pl.psi.skills;
+package pl.psi.enums;
 
 public enum SkillEnum {
     ARMORER, OFFENSE

@@ -1,18 +1,22 @@
 package pl.psi.creatures;
 
 import com.google.common.collect.Range;
+import pl.psi.skills.ArmoredDamageApplier;
 
 import java.beans.PropertyChangeEvent;
 
+//todo remove this class
 public class ArmoredCreature extends Creature {
     private final Creature decorated;
-    private final int  level;
+    private final int level;
+    private DamageApplier damageApplier;
 
     public ArmoredCreature(final Creature decorated, int aLevel) {
         this.decorated = decorated;
         if (aLevel < 1) {
             level = 1;
         } else level = Math.min(aLevel, 3);
+        damageApplier = new ArmoredDamageApplier(decorated.getDamageApplier(), level);
     }
 
     public double getMultiplier() {
@@ -91,15 +95,7 @@ public class ArmoredCreature extends Creature {
     @Override
     protected void setCurrentHp(int aCurrentHp)
     {
-        if (aCurrentHp < decorated.getCurrentHp()) {
-            int difference = decorated.getCurrentHp() - aCurrentHp;
-            difference *= getMultiplier();
-            int amountToSet = decorated.getCurrentHp() - difference;
-            decorated.setCurrentHp(amountToSet);
-        }
-        else {
-            decorated.setCurrentHp(aCurrentHp);
-        }
+        decorated.setCurrentHp(aCurrentHp);
     }
 
     @Override
@@ -115,5 +111,10 @@ public class ArmoredCreature extends Creature {
     @Override
     public String toString() {
         return decorated.toString();
+    }
+
+    @Override
+    public DamageApplier getDamageApplier() {
+        return damageApplier;
     }
 }

@@ -6,7 +6,7 @@ import pl.psi.creatures.Creature;
 
 import lombok.Getter;
 import pl.psi.skills.Skill;
-import pl.psi.skills.SkillEnum;
+import pl.psi.enums.SkillEnum;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).

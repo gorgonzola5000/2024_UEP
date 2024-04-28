@@ -4,8 +4,9 @@ import lombok.Getter;
 import pl.psi.enums.AttackTypeEnum;
 import pl.psi.enums.CreatureTypeEnum;
 
+@Getter
 public class DamageValueObject {
-        @Getter
+
         private int damageAmount;
         private AttackTypeEnum attackType;
         private CreatureTypeEnum creatureType;
