@@ -25,8 +25,16 @@ public class Resources
     private final int cristals;
     private final int gems;
 
-    Resources subtract(Resources aResourcesToSubstract){
-        return Resources.builder().gold(this.gold - aResourcesToSubstract.getGold()).build();
+    public Resources subtract(Resources aResourcesToSubtract){
+        return Resources.builder()
+                .gold(this.gold - aResourcesToSubtract.getGold())
+                .wood(this.wood - aResourcesToSubtract.getWood())
+                .ore(this.ore - aResourcesToSubtract.getOre())
+                .mercury(this.mercury - aResourcesToSubtract.getMercury())
+                .sulfur(this.sulfur - aResourcesToSubtract.getSulfur())
+                .cristals(this.cristals - aResourcesToSubtract.getCristals())
+                .gems(this.gems - aResourcesToSubtract.getGems())
+                .build();
     }
 
     public static Resources startRes(){
@@ -38,6 +46,18 @@ public class Resources
                 .sulfur(10)
                 .cristals(10)
                 .gems(10)
+                .build();
+    }
+
+    public Resources multiply(double factor) {
+        return Resources.builder()
+                .gold((int) (this.gold * factor))
+                .wood((int) (this.wood * factor))
+                .ore((int) (this.ore * factor))
+                .mercury((int) (this.mercury * factor))
+                .sulfur((int) (this.sulfur * factor))
+                .cristals((int) (this.cristals * factor))
+                .gems((int) (this.gems * factor))
                 .build();
     }
 }
