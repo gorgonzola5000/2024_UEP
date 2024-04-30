@@ -7,6 +7,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import pl.psi.creatures.EconomyCreature;
 
 /**
@@ -20,6 +21,7 @@ public class EconomyHero implements PropertyChangeListener
     private final List< EconomyCreature > creatures;
     private int maxMovePoints;
     private int currentMovePoints;
+    @Setter
     private Resources resources;
     private Castle castle;
 
@@ -50,6 +52,5 @@ public class EconomyHero implements PropertyChangeListener
     public void addCreature(EconomyCreature aEconomyCreature) {
         creatures.add(aEconomyCreature);
     }
-
 
 }

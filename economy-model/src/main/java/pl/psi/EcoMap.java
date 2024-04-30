@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import pl.psi.objects.Field;
+import pl.psi.objects.FieldFactory;
+import pl.psi.objects.GoldField;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -14,12 +17,17 @@ public class EcoMap
     private final BiMap< Point, EconomyHero > map = HashBiMap.create();
     private final BiMap<Point, MapObject> mapObjects = HashBiMap.create();
 
+    private final BiMap<Point, Field> mapField = HashBiMap.create();
+
+
     Castle castle = new Castle();
+
     public EcoMap(final EconomyHero aHero1, final EconomyHero aHero2, PropertyChangeSupport aObserverSupport)
     {
         map.put( new Point( 5, 5 ), aHero1 );
         map.put( new Point( EconomyEngine.BOARD_WEIGHT - 5, EconomyEngine.BOARD_HEIGHT - 5 ), aHero2 );
         mapObjects.put(new Point(1,1), castle);
+        mapField.put(new Point(2,2), FieldFactory.createField("wood", 10));
     }
 
     Optional< EconomyHero > getHero( final Point aPoint )
@@ -61,4 +69,9 @@ public class EcoMap
     public boolean isCastlePoint(Point aPoint) {
         return mapObjects.containsKey(aPoint);
     }
+
+    public boolean isFieldPoint(Point aPoint){
+        return mapField.containsKey(aPoint);
+    }
+
 }

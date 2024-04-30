@@ -2,14 +2,13 @@ package pl.psi.gui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Optional;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import pl.psi.EconomyEngine;
 import pl.psi.EconomyHero;
@@ -36,11 +35,14 @@ public class EcoController implements PropertyChangeListener {
         engine.addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, this);
         engine.addObserver(EconomyEngine.TURN_END, this);
         passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> engine.pass());
+
     }
 
     void refreshGui() {
         grid.getChildren()
                 .clear();
+
+
         for (int x = 0; x < EconomyEngine.BOARD_WEIGHT; x++) {
             for (int y = 0; y < EconomyEngine.BOARD_HEIGHT; y++) {
                 Point currentPoint = new Point(x, y);
@@ -75,6 +77,15 @@ public class EcoController implements PropertyChangeListener {
                     });
                 }
 
+                if(engine.isFieldPoint(currentPoint)){
+                    mapTile.setBackground(Color.GREENYELLOW);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED,  (e) -> {
+                        if(engine.isCurrentHero(currentPoint)) {
+                           engine.collectField(engine.getField(currentPoint));
+                        }
+                    });
+                }
+
 
                 grid.add(mapTile, x, y);
             }
@@ -84,5 +95,7 @@ public class EcoController implements PropertyChangeListener {
     @Override
     public void propertyChange(final PropertyChangeEvent aPropertyChangeEvent) {
         refreshGui();
+
+
     }
 }
