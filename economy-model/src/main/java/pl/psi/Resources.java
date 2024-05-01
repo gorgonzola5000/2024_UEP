@@ -37,6 +37,19 @@ public class Resources
                 .build();
     }
 
+
+    public Resources addResources(Resources aResourcesToSubtract){
+        return Resources.builder()
+                .gold(this.gold + aResourcesToSubtract.getGold())
+                .wood(this.wood + aResourcesToSubtract.getWood())
+                .ore(this.ore + aResourcesToSubtract.getOre())
+                .mercury(this.mercury + aResourcesToSubtract.getMercury())
+                .sulfur(this.sulfur + aResourcesToSubtract.getSulfur())
+                .cristals(this.cristals + aResourcesToSubtract.getCristals())
+                .gems(this.gems + aResourcesToSubtract.getGems())
+                .build();
+    }
+
     public static Resources startRes(){
         return Resources.builder()
                 .gold(15000)
