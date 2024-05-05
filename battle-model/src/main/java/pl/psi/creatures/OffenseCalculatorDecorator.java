@@ -1,14 +1,12 @@
 package pl.psi.creatures;
 
-import java.util.Random;
-
 public class OffenseCalculatorDecorator extends AbstractCalculateDamageStrategy {
     private final int level;
     private final AbstractCalculateDamageStrategy decorated;
 
 
     public OffenseCalculatorDecorator(DamageCalculatorIf aDecorated, int aLevel) {
-        super(new Random()); //todo tu raczej trzeba bedzie przekazac tego randoma w jakis sposob niz robic nowego
+        super(aDecorated.getRand());
         decorated = (AbstractCalculateDamageStrategy) aDecorated;
         level = aLevel;
     }
