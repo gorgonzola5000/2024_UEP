@@ -51,18 +51,18 @@ class MachineFactoryTest {
 
         MachineFactory machineFactory = new MachineFactory();
 
-        Creature ballista = machineFactory.create("BALLISTA");
+        Creature ballista = machineFactory.create("Ballista");
+        Creature firstAidTent = machineFactory.create("First Aid Tent");
         List<Creature> creaturesList = new ArrayList<>();
+        creaturesList.add(firstAidTent);
         creaturesList.add(ballista);
         creaturesList.add(dragon);
         // when
-        dragon.attack(ballista);
         ballista.attack(dragon);
-        machineFactory.chooseHealCreature(creaturesList);
-
+        firstAidTent.chooseHealCreature(creaturesList);
         // then
         assertThat(dragon.getCurrentHp()).isEqualTo(70);
-        assertThat(magic.getCurrentHp()).isEqualTo(magic.getMaxHp());
+        assertThat(dragon.getCurrentHp()).isEqualTo(dragon.getMaxHp());
     }
 
 }
