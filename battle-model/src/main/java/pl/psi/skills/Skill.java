@@ -22,7 +22,7 @@ public abstract class Skill {
 
     }
 
-    public int validateLevel(int aLevel) {
+    private int validateLevel(int aLevel) {
         int levelToReturn;
         if (aLevel < 1) {
             levelToReturn = 1;

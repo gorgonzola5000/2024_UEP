@@ -89,6 +89,7 @@ public class Creature implements PropertyChangeListener {
         aAttacker.counterAttackCounter--;
     }
 
+    //potencjalnie lepiej zamiast skillEnuma dawac jako parametr dekorator DamageAppliera
     public void decorateDamageApplier(SkillEnum aSkillEnum, int level) {
         switch (aSkillEnum) {
             case ARMORER:

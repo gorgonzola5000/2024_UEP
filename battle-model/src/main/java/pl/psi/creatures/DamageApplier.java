@@ -42,5 +42,4 @@ public class DamageApplier {
         }
         getCreature().setAmount(getCreature().getAmount() - amountToSubtract);
     }
-
 }

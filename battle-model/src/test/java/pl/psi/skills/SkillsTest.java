@@ -16,6 +16,7 @@ public class SkillsTest {
     void basicArmoredCreatureTest() {
         final int MAX_HP = 200;
 
+        //given
         Creature creatureWithArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
                         .attack(20)
