@@ -8,6 +8,7 @@ package pl.psi.creatures;//  ***************************************************
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 import java.util.Random;
 
 import lombok.Setter;
@@ -147,5 +148,23 @@ public class Creature implements PropertyChangeListener {
     @Override
     public String toString() {
         return getName() + System.lineSeparator() + getAmount();
+    }
+
+
+    //MachineFactoryMethods - FirstAidTent
+    public void healHPCreature(Creature creature) {
+        creature.restoreCurrentHpToMax();
+    }
+
+    public void chooseHealCreature(List<Creature> creatureList) {
+        Creature smallHP = creatureList.get(0);
+        for (Creature creature : creatureList) {
+            if (creature.getCurrentHp()<smallHP.getCurrentHp()){
+                smallHP=creature;
+            }
+
+        }
+        healHPCreature(smallHP);
+
     }
 }

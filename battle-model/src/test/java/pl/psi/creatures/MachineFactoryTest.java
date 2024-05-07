@@ -30,9 +30,10 @@ class MachineFactoryTest {
                         .build())
                 .build();
         MachineFactory machineFactory = new MachineFactory();
+        Creature firstAidTent = machineFactory.create("First Aid Tent");
         // when
         angel.attack(dragon);
-        machineFactory.healHPCreature(dragon);
+        firstAidTent.healHPCreature(dragon);
         // then
         assertThat(dragon.getCurrentHp()).isEqualTo(dragon.getMaxHp());
     }
@@ -40,13 +41,6 @@ class MachineFactoryTest {
     @Test
     void TestHealListCreature() {
         // given
-        final Creature angel = new Creature.Builder().statistic(CreatureStats.builder()
-                        .maxHp(100)
-                        .damage(Range.closed(10, 10))
-                        .attack(50)
-                        .armor(0)
-                        .build())
-                .build();
         final Creature dragon = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(NOT_IMPORTANT_DMG)
@@ -54,20 +48,16 @@ class MachineFactoryTest {
                         .armor(10)
                         .build())
                 .build();
-        final Creature magic = new Creature.Builder().statistic(CreatureStats.builder()
-                        .maxHp(70)
-                        .damage(NOT_IMPORTANT_DMG)
-                        .attack(0)
-                        .armor(5)
-                        .build())
-                .build();
+
         MachineFactory machineFactory = new MachineFactory();
-        List<Creature> creaturesList = new ArrayList<Creature>();
+
+        Creature ballista = machineFactory.create("BALLISTA");
+        List<Creature> creaturesList = new ArrayList<>();
+        creaturesList.add(ballista);
         creaturesList.add(dragon);
-        creaturesList.add(magic);
         // when
-        angel.attack(dragon);
-        angel.attack(magic);
+        dragon.attack(ballista);
+        ballista.attack(dragon);
         machineFactory.chooseHealCreature(creaturesList);
 
         // then

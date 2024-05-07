@@ -61,7 +61,7 @@ public enum CreatureStatistic implements CreatureStatisticIf
             true),//
     CATAPULT("Catapult",10,10,1000,0,Range.closed(0,0),0,
             "Every hero has one all the time. Catapult is affected by Balistics skill, which unlike other war machine skills is very important to learn. Catapult is durable and comes under your control as you deveop Ballistics. If you are under seige and have powerful spells, destroy the enemy catapult so you can keep your walls and archer towers, turning the tides of battle in your favour. Ballistics secondary skills is essential for towns like Fortress who lack strong flyers and shooters, they must break through the drawbridge before enemy shooters have a good go at them.",
-            true);
+            true);//
 
 
 
@@ -80,6 +80,7 @@ public enum CreatureStatistic implements CreatureStatisticIf
     CreatureStatistic( final String aName, final int aAttack, final int aArmor, final int aMaxHp,
         final int aMoveRange, final Range< Integer > aDamage, final int aTier, final String aDescription,
         final boolean aIsUpgraded )
+
     {
         name = aName;
         attack = aAttack;
@@ -90,6 +91,7 @@ public enum CreatureStatistic implements CreatureStatisticIf
         tier = aTier;
         description = aDescription;
         isUpgraded = aIsUpgraded;
+
     }
 
     String getTranslatedName()

@@ -3,7 +3,7 @@ package pl.psi.creatures;
 import java.util.List;
 
 public class MachineFactory
-{   private static final String EXCEPTION_MESSAGE = "Name not found";
+{   private static final String EXCEPTION_MESSAGE = "Name of war machine not found";
     public Creature create( final String aName)
     {
             switch( aName )
@@ -20,22 +20,6 @@ public class MachineFactory
                 default:
                     throw new IllegalArgumentException( EXCEPTION_MESSAGE );
             }
-    }
-
-    public void healHPCreature(Creature creature) {
-        creature.restoreCurrentHpToMax();
-    }
-
-    public void chooseHealCreature(List<Creature> creatureList) {
-        Creature smallHP = creatureList.get(0);
-        for (Creature creature : creatureList) {
-            if (creature.getCurrentHp()<smallHP.getCurrentHp()){
-                smallHP=creature;
-            }
-
-        }
-        healHPCreature(smallHP);
-
     }
 
 }
