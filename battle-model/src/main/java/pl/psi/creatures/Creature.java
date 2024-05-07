@@ -18,6 +18,8 @@ import com.google.common.collect.Range;
 
 import lombok.Getter;
 
+import static java.lang.Math.random;
+
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
@@ -112,6 +114,16 @@ public class Creature implements PropertyChangeListener {
         currentHp = stats.getMaxHp();
     }
 
+    protected void restoreCurrentHpToPartHP() {
+        Random random = new Random();
+        int healHP = random.nextInt(25)+1;
+        if (currentHp+healHP >= stats.getMaxHp()) {
+            currentHp = stats.getMaxHp();
+        } else {
+            currentHp = currentHp+healHP;
+        }
+    }
+
     public String getName() {
         return stats.getName();
     }
@@ -153,7 +165,7 @@ public class Creature implements PropertyChangeListener {
 
     //MachineFactoryMethods - FirstAidTent
     public void healHPCreature(Creature creature) {
-        creature.restoreCurrentHpToMax();
+        creature.restoreCurrentHpToPartHP();
     }
 
     public void chooseHealCreature(List<Creature> creatureList) {
