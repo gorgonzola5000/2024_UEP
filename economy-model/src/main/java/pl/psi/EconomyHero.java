@@ -56,10 +56,6 @@ public class EconomyHero implements PropertyChangeListener
         creatures.add(aEconomyCreature);
     }
 
-    public void castSkill(SkillEnum skillEnum) {
-        Skill skillToCast = skills.get(skillEnum);
-    }
-
     public void addSkill(Skill aSkill) {
         skills.put(aSkill.getSkillName(), aSkill);
     }

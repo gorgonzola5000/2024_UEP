@@ -1,10 +1,8 @@
 package pl.psi.skills;
 
 import lombok.Getter;
-import pl.psi.creatures.Creature;
 import pl.psi.enums.SkillEnum;
 
-import java.util.List;
 import java.util.Objects;
 
 public abstract class Skill {
@@ -18,7 +16,7 @@ public abstract class Skill {
         skillName = aSkillEnum;
     }
 
-    public void cast(List<Creature> creatures) {
+    public void cast() {
 
     }
 

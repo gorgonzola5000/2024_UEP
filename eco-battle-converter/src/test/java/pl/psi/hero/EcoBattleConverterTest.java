@@ -3,12 +3,15 @@ package pl.psi.hero;
 import org.junit.jupiter.api.Test;
 import pl.psi.EconomyHero;
 import pl.psi.converter.EcoBattleConverter;
+import skills.ArmorerSkill;
+import pl.psi.creatures.ArmoredDamageApplierDecorator;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.EconomyNecropolisFactory;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EcoBattleConverterTest {
 
@@ -63,6 +66,19 @@ class EcoBattleConverterTest {
                 .getName());
         assertEquals(7, convertedCreatures.get(6)
                 .getAmount());
+    }
+
+    @Test
+    void armorerSkillTest() {
+        final EconomyHero ecoHero = new EconomyHero("name");
+        final EconomyNecropolisFactory factory = new EconomyNecropolisFactory();
+        ecoHero.addCreature(factory.create(false, 1));
+        ecoHero.addCreature(factory.create(false, 2));
+        ecoHero.addSkill(new ArmorerSkill(1));
+        final List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero)
+                .getCreatures();
+        assertTrue(convertedCreatures.get(0).getDamageApplier() instanceof ArmoredDamageApplierDecorator);
+        assertTrue(convertedCreatures.get(1).getDamageApplier() instanceof ArmoredDamageApplierDecorator);
     }
 
 }
