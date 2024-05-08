@@ -2,10 +2,10 @@ package pl.psi.skills;
 
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.Test;
+import pl.psi.creatures.ArmoredDamageApplierDecorator;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.CreatureStats;
-import pl.psi.enums.SkillEnum;
-
+import pl.psi.creatures.OffenseCalculatorDecorator;
 
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -24,7 +24,7 @@ public class SkillsTest {
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-        creatureWithArmorer.decorateDamageApplier(SkillEnum.ARMORER, 1);
+        creatureWithArmorer.decorateDamageApplier(new ArmoredDamageApplierDecorator(creatureWithArmorer.getDamageApplier(), 1));
 
         Creature creatureWithoutArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
@@ -54,7 +54,7 @@ public class SkillsTest {
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-        creatureWithArmorer.decorateDamageApplier(SkillEnum.ARMORER, 2);
+        creatureWithArmorer.decorateDamageApplier(new ArmoredDamageApplierDecorator(creatureWithArmorer.getDamageApplier(), 2));
 
         Creature creatureWithoutArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
@@ -84,8 +84,7 @@ public class SkillsTest {
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-
-        creatureWithArmorer.decorateDamageApplier(SkillEnum.ARMORER, 3);
+        creatureWithArmorer.decorateDamageApplier(new ArmoredDamageApplierDecorator(creatureWithArmorer.getDamageApplier(), 3));
 
         Creature creatureWithoutArmorer = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
@@ -115,7 +114,7 @@ public class SkillsTest {
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-        creatureWithOffense.decorateCalculator(SkillEnum.OFFENSE, 1);
+        creatureWithOffense.decorateCalculator(new OffenseCalculatorDecorator(creatureWithOffense.getCalculator(), 1));
 
         Creature creatureWithoutOffense = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
@@ -145,7 +144,7 @@ public class SkillsTest {
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-        creatureWithOffense.decorateCalculator(SkillEnum.OFFENSE, 2);
+        creatureWithOffense.decorateCalculator(new OffenseCalculatorDecorator(creatureWithOffense.getCalculator(), 2));
 
         Creature creatureWithoutOffense = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)
@@ -175,7 +174,7 @@ public class SkillsTest {
                         .damage(Range.closed(50, 50))
                         .build())
                 .build();
-        creatureWithOffense.decorateCalculator(SkillEnum.OFFENSE, 3);
+        creatureWithOffense.decorateCalculator(new OffenseCalculatorDecorator(creatureWithOffense.getCalculator(), 3));
 
         Creature creatureWithoutOffense = new Creature.Builder().statistic(CreatureStats.builder()
                         .armor(20)

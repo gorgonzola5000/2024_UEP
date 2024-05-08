@@ -18,7 +18,6 @@ import com.google.common.collect.Range;
 
 import lombok.Getter;
 import pl.psi.enums.CreatureTypeEnum;
-import pl.psi.enums.SkillEnum;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -54,7 +53,8 @@ public class Creature implements PropertyChangeListener {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             DamageValueObject damageObject = new DamageValueObject(damage, this.attackType, this.creatureType);
-            aDefender.applyDamage(damageObject);
+//            aDefender.applyDamage(damageObject);
+            aDefender.getDamageApplier().applyDamage(damageObject);
             if (canCounterAttack(aDefender)) {
                 counterAttack(aDefender);
             }
@@ -85,23 +85,18 @@ public class Creature implements PropertyChangeListener {
         final int damage = aAttacker.getCalculator()
                 .calculateDamage(aAttacker, this);
         DamageValueObject aDamageValueObject = new DamageValueObject(damage, this.attackType, this.creatureType);
-        applyDamage(aDamageValueObject);
+//        applyDamage(aDamageValueObject);
+        this.getDamageApplier().applyDamage(aDamageValueObject); //spytac czy lepiej uzywac getDamageApplier czy damageApplier
         aAttacker.counterAttackCounter--;
     }
 
     //potencjalnie lepiej zamiast skillEnuma dawac jako parametr dekorator DamageAppliera
-    public void decorateDamageApplier(SkillEnum aSkillEnum, int level) {
-        switch (aSkillEnum) {
-            case ARMORER:
-                damageApplier = new ArmoredDamageApplierDecorator(damageApplier, level);
-        }
+    public void decorateDamageApplier(DamageApplier aDamageApplier) {
+            damageApplier = aDamageApplier;
     }
 
-    public void decorateCalculator(SkillEnum aSkillEnum, int level) {
-        switch (aSkillEnum) {
-            case OFFENSE:
-                calculator = new OffenseCalculatorDecorator(calculator, level);
-        }
+    public void decorateCalculator(DamageCalculatorIf aCalculator) {
+        calculator = aCalculator;
     }
 
 
