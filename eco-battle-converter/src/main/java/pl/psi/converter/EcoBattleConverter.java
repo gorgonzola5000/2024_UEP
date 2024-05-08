@@ -43,7 +43,7 @@ public class EcoBattleConverter {
                 .forEach(ecoCreature -> creatures
                         .add(factory.create(ecoCreature.isUpgraded(), ecoCreature.getTier(), 1)));
 
-
+        // Zakładam ze skille "nie battle" nie muszą byc zalaczane tutaj, poniewaz one musza dzialac jak sobie biegamy po mapie
         for (Skill skill : aPlayer1.getSkills().values()) {
             if (skill instanceof BattleSkill) {
                 ((BattleSkill) skill).cast(creatures);

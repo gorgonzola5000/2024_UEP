@@ -12,12 +12,8 @@ public abstract class Skill {
     protected SkillEnum skillName;
 
     public Skill(SkillEnum aSkillEnum, int aLevel) {
-        level = validateLevel(aLevel);
         skillName = aSkillEnum;
-    }
-
-    public void cast() {
-
+        level = validateLevel(aLevel);
     }
 
     private int validateLevel(int aLevel) {
@@ -26,18 +22,5 @@ public abstract class Skill {
             levelToReturn = 1;
         } else levelToReturn = Math.min(aLevel, 3);
         return levelToReturn;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Skill skill = (Skill) o;
-        return level == skill.level;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(level);
     }
 }

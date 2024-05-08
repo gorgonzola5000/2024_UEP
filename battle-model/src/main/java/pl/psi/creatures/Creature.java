@@ -136,7 +136,7 @@ public class Creature implements PropertyChangeListener {
         private DamageCalculatorIf calculator = new DefaultDamageCalculator(new Random());
         private CreatureStatisticIf statistic;
         private final CreatureTypeEnum creatureType = CreatureTypeEnum.GROUND;
-        private final AttackTypeEnum attackType = AttackTypeEnum.MELEE;
+        private AttackTypeEnum attackType = AttackTypeEnum.MELEE;
 
         public Builder statistic(final CreatureStatisticIf aStatistic) {
             statistic = aStatistic;
@@ -150,6 +150,11 @@ public class Creature implements PropertyChangeListener {
 
         Builder calculator(final DamageCalculatorIf aCalc) {
             calculator = aCalc;
+            return this;
+        }
+
+        public Builder attackType(final AttackTypeEnum aAttackType) {
+            attackType = aAttackType;
             return this;
         }
 
