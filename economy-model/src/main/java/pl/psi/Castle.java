@@ -1,5 +1,7 @@
 package pl.psi;
 
+import lombok.Getter;
+import lombok.Setter;
 import pl.psi.buildings.Building;
 
 import javax.naming.InsufficientResourcesException;
@@ -10,8 +12,12 @@ public class Castle implements MapObject {
 
     private List<Building> buildings = new ArrayList<>();
 
-    public Castle(){
+    @Setter
+    @Getter
+    Resources resources;
 
+
+    public Castle(){
     }
 
 
@@ -24,9 +30,11 @@ public class Castle implements MapObject {
     }
 
 
-    public void upgradeBuilding(int index, Resources availableResources) throws InsufficientResourcesException {
+    public void upgradeBuilding(int index) throws InsufficientResourcesException {
         Building building = buildings.get(index);
-        building.upgrade(availableResources);
+        resources = building.upgrade(resources);
     }
+
+
 
 }
