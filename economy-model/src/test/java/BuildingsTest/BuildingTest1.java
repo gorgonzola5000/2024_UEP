@@ -3,11 +3,11 @@ package BuildingsTest;
 
 import org.junit.jupiter.api.Test;
 import pl.psi.Castle;
+import pl.psi.InsufficientResourcesException;
 import pl.psi.Resources;
 import pl.psi.buildings.Building;
 import pl.psi.buildings.ExampleBuilding;
 
-import javax.naming.InsufficientResourcesException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

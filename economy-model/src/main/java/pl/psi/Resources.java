@@ -38,8 +38,8 @@ public class Resources
     }
 
 
-    public Resources addResources(Resources aResourcesToSubtract){
-        return Resources.builder()
+    public void addResources(Resources aResourcesToSubtract){
+        Resources.builder()
                 .gold(this.gold + aResourcesToSubtract.getGold())
                 .wood(this.wood + aResourcesToSubtract.getWood())
                 .ore(this.ore + aResourcesToSubtract.getOre())
@@ -72,5 +72,15 @@ public class Resources
                 .cristals((int) (this.cristals * factor))
                 .gems((int) (this.gems * factor))
                 .build();
+    }
+
+    public boolean hasEnough(Resources requiredResources) {
+        return gold >= requiredResources.getGold() &&
+                wood >= requiredResources.getWood() &&
+                ore >= requiredResources.getOre() &&
+                mercury >= requiredResources.getMercury() &&
+                sulfur >= requiredResources.getSulfur() &&
+                cristals >= requiredResources.getCristals() &&
+                gems >= requiredResources.getGems();
     }
 }

@@ -1,7 +1,7 @@
 package pl.psi;
 
 import lombok.Getter;
-import pl.psi.objects.Field;
+import pl.psi.objects.ResourcesField;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -78,13 +78,11 @@ public class EconomyEngine {
     }
 
 
-    public void collectField(Field field) {
+    public void collectField(ResourcesField field) {
         EconomyHero hero = turnQueue.getCurrentHero();
         field.apply(hero);
 
     }
 
-    public Field getField(Point currentPoint) {
-        return getField(currentPoint);
-    }
+
 }

@@ -2,9 +2,8 @@ package pl.psi.buildings;
 
 import lombok.Builder;
 import lombok.Getter;
+import pl.psi.InsufficientResourcesException;
 import pl.psi.Resources;
-
-import javax.naming.InsufficientResourcesException;
 
 public class Building{
 
@@ -12,13 +11,12 @@ public class Building{
     @Getter
     int tier;
     private final Resources requiredResources;
-    private final int maxTier;
+    private final static int maxTier = 2;
 
     public Building(String name, Resources requiredResources) {
         this.name = name;
         this.requiredResources = requiredResources;
         this.tier = 1;
-        this.maxTier = 5;
     }
 
     public Resources upgrade(Resources availableResources) throws InsufficientResourcesException {
@@ -35,14 +33,7 @@ public class Building{
             throw new InsufficientResourcesException("Brak wystarczających zasobów do ulepszenia budynku " + name);
         }
     }
-
     private boolean canUpgrade(Resources availableResources) {
-        return availableResources.getGold() >= requiredResources.getGold() &&
-                availableResources.getWood() >= requiredResources.getWood() &&
-                availableResources.getOre() >= requiredResources.getOre() &&
-                availableResources.getMercury() >= requiredResources.getMercury() &&
-                availableResources.getSulfur() >= requiredResources.getSulfur() &&
-                availableResources.getCristals() >= requiredResources.getCristals() &&
-                availableResources.getGems() >= requiredResources.getGems();
+        return availableResources.hasEnough(requiredResources);
     }
 }
