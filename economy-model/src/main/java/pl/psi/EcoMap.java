@@ -79,4 +79,8 @@ public class EcoMap
         return fieldObjects.containsKey(aPoint);
     }
 
+    public ResourcesField getField(Point aPoint) {
+
+        return fieldObjects.get(aPoint);
+    }
 }

@@ -15,4 +15,5 @@ public class FieldObjects implements MapObject{
         fieldMap.put(new Point(2,2), new ResourcesField(Resources.builder().gold(10).build()));
 
     }
+
 }

@@ -84,5 +84,8 @@ public class EconomyEngine {
 
     }
 
+    public ResourcesField getField(Point currentPoint) {
+        return board.getField(currentPoint);
 
+    }
 }
