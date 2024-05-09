@@ -21,12 +21,13 @@ public class Building{
         this.maxTier = 5;
     }
 
-    public void upgrade(Resources availableResources) throws InsufficientResourcesException {
+    public Resources upgrade(Resources availableResources) throws InsufficientResourcesException {
         if (canUpgrade(availableResources)) {
             if (tier < maxTier) {
                 tier++;
+                availableResources = availableResources.subtract(requiredResources);
                 requiredResources.multiply(1.5);
-                availableResources.subtract(requiredResources);
+                return availableResources;
             } else {
                 throw new InsufficientResourcesException("Budynek " + name + " osiągnął już maksymalny poziom tieru.");
             }
