@@ -7,7 +7,6 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import pl.psi.creatures.EconomyCreature;
 
 /**
@@ -21,7 +20,7 @@ public class EconomyHero implements PropertyChangeListener
     private final List< EconomyCreature > creatures;
     private int maxMovePoints;
     private int currentMovePoints;
-    private Resources resources;
+    private Resources resources = Resources.startRes();
     private Castle castle;
 
     public EconomyHero( String aName )
@@ -30,7 +29,7 @@ public class EconomyHero implements PropertyChangeListener
         creatures = new ArrayList<>();
         maxMovePoints = 10;
         currentMovePoints = maxMovePoints;
-        resources = Resources.startRes();
+
     }
 
     @Override
@@ -53,6 +52,6 @@ public class EconomyHero implements PropertyChangeListener
     }
 
     public void changeResources(Resources resources) {
-        resources.addResources(resources);
+        this.resources = this.resources.addResources(resources);
     }
 }

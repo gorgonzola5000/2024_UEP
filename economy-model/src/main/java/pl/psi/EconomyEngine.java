@@ -88,4 +88,9 @@ public class EconomyEngine {
         return board.getField(currentPoint);
 
     }
+
+
+    public EconomyHero getCurrentHero() {
+        return turnQueue.getCurrentHero();
+    }
 }

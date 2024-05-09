@@ -6,6 +6,7 @@ import pl.psi.*;
 import pl.psi.objects.ResourcesField;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FieldTest {
 
@@ -13,12 +14,16 @@ public class FieldTest {
 
     @Test
     void FieldShouldAddWoodCorrectly() {
-        ResourcesField goldField =  new ResourcesField(Resources.builder().wood(10).build());
+        ResourcesField woodField = new ResourcesField(Resources.builder().wood(10).build());
 
         EconomyHero hero = new EconomyHero("hero");
 
-        goldField.apply(hero);
 
+        assertThat(hero.getResources().getWood()).isEqualTo(20);
+
+        woodField.apply(hero);
+
+        assertThat(hero.getResources().getWood()).isEqualTo(30);
 
 
     }

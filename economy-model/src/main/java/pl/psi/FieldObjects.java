@@ -13,6 +13,7 @@ public class FieldObjects implements MapObject{
 
     public FieldObjects() {
         fieldMap.put(new Point(2,2), new ResourcesField(Resources.builder().gold(10).build()));
+        fieldMap.put(new Point(5,10), new ResourcesField(Resources.builder().wood(100).build()));
 
     }
 

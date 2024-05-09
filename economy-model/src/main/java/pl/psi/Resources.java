@@ -38,8 +38,8 @@ public class Resources
     }
 
 
-    public void addResources(Resources aResourcesToSubtract){
-        Resources.builder()
+    public Resources addResources(Resources aResourcesToSubtract){
+        return Resources.builder()
                 .gold(this.gold + aResourcesToSubtract.getGold())
                 .wood(this.wood + aResourcesToSubtract.getWood())
                 .ore(this.ore + aResourcesToSubtract.getOre())
@@ -82,5 +82,15 @@ public class Resources
                 sulfur >= requiredResources.getSulfur() &&
                 cristals >= requiredResources.getCristals() &&
                 gems >= requiredResources.getGems();
+    }
+
+    public String getAllResourcesAsString() {
+        return "Gold: " + gold +
+                ", Wood: " + wood +
+                ", Ore: " + ore +
+                ", Mercury: " + mercury +
+                ", Sulfur: " + sulfur +
+                ", Crystals: " + cristals +
+                ", Gems: " + gems;
     }
 }
