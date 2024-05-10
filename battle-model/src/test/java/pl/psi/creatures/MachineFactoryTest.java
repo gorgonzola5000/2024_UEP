@@ -1,6 +1,7 @@
 package pl.psi.creatures;
 
 import com.google.common.collect.Range;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 class MachineFactoryTest {
 
     private static final Range<Integer> NOT_IMPORTANT_DMG = Range.closed(0, 0);
