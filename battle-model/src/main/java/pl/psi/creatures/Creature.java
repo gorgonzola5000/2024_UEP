@@ -8,6 +8,7 @@ package pl.psi.creatures;//  ***************************************************
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 import java.util.Random;
 
 import lombok.Setter;
@@ -18,6 +19,8 @@ import com.google.common.collect.Range;
 
 import lombok.Getter;
 import pl.psi.enums.CreatureTypeEnum;
+
+import static java.lang.Math.random;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -138,6 +141,16 @@ public class Creature implements PropertyChangeListener {
         currentHp = stats.getMaxHp();
     }
 
+    protected void restoreCurrentHpToPartHP() {
+        Random random = new Random();
+        int healHP = random.nextInt(25)+1;
+        if (currentHp+healHP >= stats.getMaxHp()) {
+            currentHp = stats.getMaxHp();
+        } else {
+            currentHp = currentHp+healHP;
+        }
+    }
+
     public String getName() {
         return stats.getName();
     }
@@ -181,5 +194,23 @@ public class Creature implements PropertyChangeListener {
     @Override
     public String toString() {
         return getName() + System.lineSeparator() + getAmount();
+    }
+
+
+    //MachineFactoryMethods - FirstAidTent
+    public void healHPCreature(Creature creature) {
+        creature.restoreCurrentHpToPartHP();
+    }
+
+    public void chooseHealCreature(List<Creature> creatureList) {
+        Creature smallHP = creatureList.get(0);
+        for (Creature creature : creatureList) {
+            if (creature.getCurrentHp()<smallHP.getCurrentHp()){
+                smallHP=creature;
+            }
+
+        }
+        healHPCreature(smallHP);
+
     }
 }
