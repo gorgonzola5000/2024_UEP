@@ -3,12 +3,17 @@ package pl.psi.hero;
 import org.junit.jupiter.api.Test;
 import pl.psi.EconomyHero;
 import pl.psi.converter.EcoBattleConverter;
+import pl.psi.creatures.OffenseCalculatorDecorator;
+import skills.ArmorerSkill;
+import pl.psi.creatures.ArmoredDamageApplierDecorator;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.EconomyNecropolisFactory;
+import skills.OffenseSkill;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EcoBattleConverterTest {
 
@@ -63,6 +68,33 @@ class EcoBattleConverterTest {
                 .getName());
         assertEquals(7, convertedCreatures.get(6)
                 .getAmount());
+    }
+
+    @Test
+    void armorerSkillTest() {
+        final EconomyHero ecoHero = new EconomyHero("name");
+        final EconomyNecropolisFactory factory = new EconomyNecropolisFactory();
+        ecoHero.addCreature(factory.create(false, 1));
+        ecoHero.addCreature(factory.create(false, 2));
+        ecoHero.addSkill(new ArmorerSkill(1));
+        final List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero)
+                .getCreatures();
+        //Czy da sie w jakis fajny sposob posprawdzac pola tych obiektow, np czy level tego damageAppliera sie zgadza
+        assertTrue(convertedCreatures.get(0).getDamageApplier() instanceof ArmoredDamageApplierDecorator);
+        assertTrue(convertedCreatures.get(1).getDamageApplier() instanceof ArmoredDamageApplierDecorator);
+    }
+
+    @Test
+    void offenseSkillTest() {
+        final EconomyHero ecoHero = new EconomyHero("name");
+        final EconomyNecropolisFactory factory = new EconomyNecropolisFactory();
+        ecoHero.addCreature(factory.create(false, 1));
+        ecoHero.addCreature(factory.create(false, 2));
+        ecoHero.addSkill(new OffenseSkill(1));
+        final List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero)
+                .getCreatures();
+        assertTrue(convertedCreatures.get(0).getCalculator() instanceof OffenseCalculatorDecorator);
+        assertTrue(convertedCreatures.get(1).getCalculator() instanceof OffenseCalculatorDecorator);
     }
 
 }

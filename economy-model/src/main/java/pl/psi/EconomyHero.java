@@ -3,11 +3,15 @@ package pl.psi;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.psi.creatures.EconomyCreature;
+import pl.psi.enums.SkillEnum;
+import pl.psi.skills.Skill;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -22,6 +26,7 @@ public class EconomyHero implements PropertyChangeListener
     private int currentMovePoints;
     private Resources resources = Resources.startRes();
     private Castle castle;
+    private final Map<SkillEnum, Skill> skills;
 
     public EconomyHero( String aName )
     {
@@ -29,7 +34,8 @@ public class EconomyHero implements PropertyChangeListener
         creatures = new ArrayList<>();
         maxMovePoints = 10;
         currentMovePoints = maxMovePoints;
-
+        resources = Resources.startRes();
+        skills = new HashMap<>();
     }
 
     @Override
@@ -53,5 +59,9 @@ public class EconomyHero implements PropertyChangeListener
 
     public void changeResources(Resources resources) {
         this.resources = this.resources.addResources(resources);
+    }
+
+    public void addSkill(Skill aSkill) {
+        skills.put(aSkill.getSkillName(), aSkill);
     }
 }

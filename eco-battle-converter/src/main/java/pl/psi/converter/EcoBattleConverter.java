@@ -10,9 +10,11 @@ import javafx.stage.Stage;
 import pl.psi.EconomyHero;
 import pl.psi.Hero;
 import pl.psi.StartBattlePack;
+import skills.BattleSkill;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.NecropolisFactory;
 import pl.psi.gui.MainBattleController;
+import pl.psi.skills.Skill;
 
 public class EcoBattleConverter {
 
@@ -40,6 +42,14 @@ public class EcoBattleConverter {
         aPlayer1.getCreatures()
                 .forEach(ecoCreature -> creatures
                         .add(factory.create(ecoCreature.isUpgraded(), ecoCreature.getTier(), 1)));
+
+        // Zakładam ze skille "nie battle" nie muszą byc zalaczane tutaj, poniewaz one musza dzialac jak sobie biegamy po mapie
+        for (Skill skill : aPlayer1.getSkills().values()) {
+            if (skill instanceof BattleSkill) {
+                ((BattleSkill) skill).cast(creatures);
+            }
+        }
+
         return new Hero(creatures);
     }
 }
