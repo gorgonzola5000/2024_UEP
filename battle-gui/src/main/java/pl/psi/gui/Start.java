@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.psi.Hero;
-import pl.psi.creatures.CastleCreatureFactory;
 import pl.psi.creatures.NecropolisFactory;
 import pl.psi.spells.SampleSpell;
 import pl.psi.spells.Spellbook;
@@ -42,7 +41,7 @@ public class Start extends Application {
 
     private Hero createP2() {
         final Hero ret = new Hero(
-                List.of(new CastleCreatureFactory().create(false, 2, 5)),
+                List.of(new NecropolisFactory().create(false, 1, 5)),
                 new Spellbook(List.of(new SampleSpell())));
         return ret;
     }
