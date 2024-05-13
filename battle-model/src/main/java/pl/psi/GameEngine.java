@@ -1,11 +1,10 @@
 package pl.psi;
 
+import pl.psi.creatures.Creature;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Optional;
-
-import lombok.Getter;
-import pl.psi.creatures.Creature;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -21,7 +20,7 @@ public class GameEngine {
     private final Hero hero1;
     private final Hero hero2;
 
-    public  GameEngine(final Hero aHero1, final Hero aHero2) {
+    public GameEngine(final Hero aHero1, final Hero aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
         turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
@@ -29,10 +28,14 @@ public class GameEngine {
     }
 
     public void attack(final Point point) {
-        board.getCreature(point)
-                .ifPresent(defender -> turnQueue.getCurrentCreature()
-                        .attack(defender));
-        pass();
+        if (canAttack(point)) {
+            board.getCreature(point)
+                    .ifPresent(defender -> turnQueue.getCurrentCreature()
+                            .attack(defender));
+            pass();
+        } else {
+            throw new IllegalStateException("Creature is too far.");
+        }
     }
 
     public boolean canMove(final Point aPoint) {
@@ -58,11 +61,12 @@ public class GameEngine {
     }
 
     public boolean canAttack(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentCreature())
-                .distance(point);
-        return board.getCreature(point)
-                .isPresent()
-                && distance < 2 && distance > 0;
+        Creature currentCreature = turnQueue.getCurrentCreature();
+        return currentCreature.getAttackType().canAttack(board.getPosition(currentCreature), point) && board.getCreature(point).isPresent();
+    }
+
+    public boolean canCounterAttack(final Point point) {
+        return this.canAttack(point);
     }
 
     public Creature getCreatureToMove() {
@@ -81,5 +85,9 @@ public class GameEngine {
 
     public boolean isCurrentCreature(Point aPoint) {
         return Optional.of(turnQueue.getCurrentCreature()).equals(board.getCreature(aPoint));
+    }
+
+    public Creature getCurrentCreature() {
+        return turnQueue.getCurrentCreature();
     }
 }

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import pl.psi.creatures.*;
 import pl.psi.enums.AttackTypeEnum;
 
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Disabled
@@ -203,7 +202,7 @@ public class SkillsTest {
                         .maxHp(MAX_HP)
                         .damage(Range.closed(10, 10))
                         .build())
-                .attackType(AttackTypeEnum.RANGE)
+                .attackType(AttackTypeEnum.RANGED)
                 .build();
         zealotWithArchery.decorateCalculator(new ArcheryCalculatorDecorator(zealotWithArchery.getCalculator(), 1));
 

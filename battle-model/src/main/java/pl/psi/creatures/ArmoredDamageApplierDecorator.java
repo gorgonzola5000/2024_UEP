@@ -34,7 +34,7 @@ public class ArmoredDamageApplierDecorator extends DamageApplier {
 
     private int calculateDamage(DamageValueObject aDamageValueObject) {
         int dmg = aDamageValueObject.getDamageAmount();
-        if (aDamageValueObject.getAttackType().equals(AttackTypeEnum.MELEE) || aDamageValueObject.getAttackType().equals(AttackTypeEnum.RANGE)) {
+        if (aDamageValueObject.getAttackType().equals(AttackTypeEnum.MELEE) || aDamageValueObject.getAttackType().equals(AttackTypeEnum.RANGED)) {
             return (int) (dmg * getMultiplier());
         }
         return dmg;
