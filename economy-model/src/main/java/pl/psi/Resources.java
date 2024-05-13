@@ -15,8 +15,7 @@ import lombok.Value;
  */
 @Value
 @Builder
-public class Resources
-{
+public class Resources {
     private final int gold;
     private final int wood;
     private final int ore;
@@ -25,7 +24,7 @@ public class Resources
     private final int cristals;
     private final int gems;
 
-    public static Resources startRes(){
+    public static Resources startRes() {
         return Resources.builder()
                 .gold(15000)
                 .wood(20)

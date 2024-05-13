@@ -1,28 +1,26 @@
 package pl.psi;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.psi.creatures.EconomyCreature;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.List;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
 @Getter
 @AllArgsConstructor
-public class EconomyHero implements PropertyChangeListener
-{
+public class EconomyHero implements PropertyChangeListener {
     private final String name;
-    private final List< EconomyCreature > creatures;
+    private final List<EconomyCreature> creatures;
     private int maxMovePoints;
     private int currentMovePoints;
     private Resources resources;
 
-    public EconomyHero( String aName, List< EconomyCreature > aCreatures )
-    {
+    public EconomyHero(String aName, List<EconomyCreature> aCreatures) {
         name = aName;
         creatures = aCreatures;
         maxMovePoints = 10;
@@ -31,17 +29,14 @@ public class EconomyHero implements PropertyChangeListener
     }
 
     @Override
-    public void propertyChange( PropertyChangeEvent aEvent )
-    {
-        if( aEvent.getPropertyName()
-            .equals( EconomyEngine.TURN_END ) )
-        {
+    public void propertyChange(PropertyChangeEvent aEvent) {
+        if (aEvent.getPropertyName()
+                .equals(EconomyEngine.TURN_END)) {
             currentMovePoints = maxMovePoints;
         }
     }
 
-    void retrieveMovePoints( double aDistance )
-    {
-        currentMovePoints = (int)Math.ceil( aDistance );
+    void retrieveMovePoints(double aDistance) {
+        currentMovePoints = (int) Math.ceil(aDistance);
     }
 }

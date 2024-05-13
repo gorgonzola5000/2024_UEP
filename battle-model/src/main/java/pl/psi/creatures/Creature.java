@@ -6,16 +6,14 @@ package pl.psi.creatures;//  ***************************************************
 //
 //  ******************************************************************
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Random;
-
+import com.google.common.collect.Range;
+import lombok.Getter;
 import lombok.Setter;
 import pl.psi.TurnQueue;
 
-import com.google.common.collect.Range;
-
-import lombok.Getter;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Random;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -64,8 +62,7 @@ public class Creature implements PropertyChangeListener {
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
             aDefender.setAmount(aDefender.getAmount() - 1);
-        }
-        else{
+        } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
@@ -116,7 +113,6 @@ public class Creature implements PropertyChangeListener {
     public String getName() {
         return stats.getName();
     }
-
 
 
     public int getMoveRange() {

@@ -1,10 +1,10 @@
 package pl.psi;
 
+import pl.psi.creatures.Creature;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Optional;
-
-import pl.psi.creatures.Creature;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -16,17 +16,19 @@ public class GameEngine {
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
-    public  GameEngine(final Hero aHero1, final Hero aHero2) {
+    public GameEngine(final Hero aHero1, final Hero aHero2) {
         turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
         board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
     }
 
     public void attack(final Point point) {
-        if (canAttack(point)){
+        if (canAttack(point)) {
             board.getCreature(point)
                     .ifPresent(defender -> turnQueue.getCurrentCreature()
                             .attack(defender));
             pass();
+        } else {
+            throw new IllegalArgumentException("Creature cannot attack this point");
         }
     }
 
@@ -66,7 +68,7 @@ public class GameEngine {
         return Optional.of(turnQueue.getCurrentCreature()).equals(board.getCreature(aPoint));
     }
 
-    public Creature getCurrentCreature(){
+    public Creature getCurrentCreature() {
         return turnQueue.getCurrentCreature();
     }
 }
