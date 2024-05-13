@@ -9,7 +9,7 @@ public class RangedAttackStrategy extends AbstractAttackStrategy {
 
     @Override
     public boolean canAttack(final Point attackerPosition, final Point targetPosition) {
-        return true;
+        return !attackerPosition.equals(targetPosition);
     }
 }
 
